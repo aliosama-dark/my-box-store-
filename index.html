@@ -3,247 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Box Store | عالم الطباعة والهدايا</title>
+    <title>My Box Store | احترافية الطباعة</title>
     <style>
         :root {
             /* الألوان مستوحاة من اللوجو الخاص بك */
-            --primary: #9b59b6; /* الأرجواني */
-            --secondary: #3498db; /* الأزرق السماوي */
-            --accent: #2c3e50;
-            --grad: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
-            --glass: rgba(255, 255, 255, 0.9);
+            --primary: #9b59b6;
+            --secondary: #3498db;
+            --bg-light: #fdfdfd;
+            --text-dark: #2d3436;
+            --shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-
-        * { box-sizing: border-box; transition: all 0.3s ease; }
 
         body { 
-            font-family: 'Cairo', sans-serif; 
-            background: #f0f2f5; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f7f9fc; 
             margin: 0; 
-            color: var(--accent);
-            overflow-x: hidden;
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
-        /* تحريك الخلفية */
-        body::before {
-            content: "";
-            position: fixed;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(155,89,182,0.05) 0%, rgba(52,152,219,0.05) 100%);
-            z-index: -1;
-            animation: rotateBg 20s linear infinite;
-        }
-
-        @keyframes rotateBg { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        .header { 
-            padding: 60px 20px; 
-            text-align: center; 
+        /* الهيدر */
+        .navbar {
             background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border-bottom: 4px solid;
-            border-image: var(--grad) 1;
-            animation: fadeInDown 1s ease;
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
         }
 
-        .logo { 
-            width: 150px; 
-            height: 150px;
-            border-radius: 50%; 
-            border: 5px solid white;
-            box-shadow: 0 0 20px rgba(155,89,182,0.3);
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
+        .navbar img { height: 60px; border-radius: 50%; }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            margin-bottom: 30px;
         }
 
-        @keyframes float { 
-            0%, 100% { transform: translateY(0); } 
-            50% { transform: translateY(-15px); } 
+        .hero h1 { 
+            font-size: 2.2rem; 
+            color: var(--primary);
+            margin-bottom: 10px;
         }
 
-        h1 { font-size: 2.5rem; margin: 0; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* شبكة المنتجات واسعة ومريحة */
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
 
-        /* شبكة المنتجات بتصميم Glassmorphism */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
         }
 
-        .product-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(155,89,182,0.2);
-        }
-
-        .product-img-container { width: 100%; height: 220px; overflow: hidden; background: #eee; }
-        .product-card img { width: 100%; height: 100%; object-fit: cover; }
-
-        .product-info { padding: 25px; text-align: center; }
-        .product-info h3 { margin: 0 0 15px 0; font-size: 1.4rem; }
-
-        .btn-order {
-            display: inline-block;
-            padding: 10px 30px;
-            background: var(--grad);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(155,89,182,0.3);
-        }
-
-        /* أنيميشن الظهور */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .product-card { animation: fadeInUp 0.8s ease backwards; }
-
-        /* واجهة الفورم المطور */
-        #order-section {
-            display: none;
-            max-width: 700px;
-            margin: 50px auto;
+        .card {
             background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            animation: zoomIn 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.4s;
+            border: 1px solid #eee;
         }
 
-        input, textarea, select {
-            border: 2px solid #eee;
-            background: #f9f9f9;
-            margin-top: 10px;
-            font-family: inherit;
-        }
+        .card:hover { transform: translateY(-10px); border-color: var(--secondary); }
 
-        input:focus { border-color: var(--primary); outline: none; background: white; }
+        .card img { width: 100%; height: 250px; object-fit: cover; }
 
-        .btn-send {
-            background: var(--grad);
+        .card-body { padding: 20px; text-align: center; }
+
+        .btn-select {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
             border: none;
-            padding: 18px;
-            width: 100%;
-            border-radius: 15px;
-            font-size: 1.2rem;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(155,89,182,0.3);
+            width: 100%;
+            font-size: 1rem;
         }
 
-        .btn-send:hover { letter-spacing: 1px; filter: brightness(1.1); }
+        /* منطقة الطلب واسعة جداً */
+        #order-form-container {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0 20px 0;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #fafafa;
+        }
+
+        .input-box:focus { border-color: var(--secondary); outline: none; background: white; }
+
+        .form-label { font-weight: bold; display: block; margin-right: 5px; }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 15px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .back-link { color: var(--secondary); cursor: pointer; display: inline-block; margin-bottom: 20px; }
 
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="header">
-    <img src="logo.jpg" alt="My Box Store Logo" class="logo">
+<div class="navbar">
+    <div style="font-weight: bold; font-size: 1.5rem;">MY BOX STORE</div>
+    <img src="logo.jpg" alt="Logo">
+</div>
+
+<div class="hero" id="hero-text">
     <h1>أهلاً بك في My Box Store</h1>
-    <p>نحول أفكارك إلى هدايا واقعية بأعلى جودة</p>
+    <p>اختر المنتج الذي تريده وسنقوم بالباقي</p>
 </div>
 
-<div class="products-grid" id="main-grid">
-    <!-- تأكد من وجود الصور التالية في المستودع أو استبدلها بروابط -->
-    <div class="product-card" style="animation-delay: 0.1s" onclick="openOrder('مج حراري')">
-        <div class="product-img-container"><img src="mug.jpg" alt="Mug"></div>
-        <div class="product-info">
-            <h3>مجات حرارية</h3>
-            <span class="btn-order">اطلب الآن</span>
-        </div>
-    </div>
-
-    <div class="product-card" style="animation-delay: 0.2s" onclick="openOrder('تيشرت مخصص')">
-        <div class="product-img-container"><img src="tshirt.jpg" alt="T-shirt"></div>
-        <div class="product-info">
-            <h3>تيشرتات قطن</h3>
-            <span class="btn-order">اطلب الآن</span>
-        </div>
-    </div>
-
-    <div class="product-card" style="animation-delay: 0.3s" onclick="openOrder('درع كريستال')">
-        <div class="product-img-container"><img src="shield.jpg" alt="Shield"></div>
-        <div class="product-info">
-            <h3>دروع وهدايا</h3>
-            <span class="btn-order">اطلب الآن</span>
-        </div>
-    </div>
-
-    <div class="product-card" style="animation-delay: 0.4s" onclick="openOrder('شهادة تقدير')">
-        <div class="product-img-container"><img src="cert.jpg" alt="Certificate"></div>
-        <div class="product-info">
-            <h3>شهادات شكر</h3>
-            <span class="btn-order">اطلب الآن</span>
-        </div>
-    </div>
-</div>
-
-<div id="order-section">
-    <a href="#" class="back-btn" onclick="goBack()" style="color: var(--primary); text-decoration: none; font-weight: bold;">← العودة للمنتجات</a>
-    <h2 id="selected-product-title" style="margin-top: 20px;">تفاصيل الطلب</h2>
-    <form id="detailsForm">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-            <div>
-                <label>الاسم</label>
-                <input type="text" id="custName" required>
-            </div>
-            <div>
-                <label>الواتساب</label>
-                <input type="tel" id="custPhone" required>
+<div class="container" id="main-content">
+    <div class="products-grid" id="grid">
+        <!-- تأكد من وجود الصور بنفس هذه الأسماء في GitHub -->
+        <div class="card">
+            <img src="mug.png" alt="Mug">
+            <div class="card-body">
+                <h3>مجات حرارية مميزة</h3>
+                <button class="btn-select" onclick="showOrder('مج حراري')">تخصيص الآن</button>
             </div>
         </div>
-        <br>
-        <label>العنوان</label>
-        <input type="text" id="address" required>
-        <br><br>
-        <label>ارفع تصميمك (إن وجد)</label>
-        <input type="file" id="designFile">
-        <br><br>
-        <label>ملاحظاتك الخاصة (اللون، المقاس، النص..)</label>
-        <textarea id="notes" rows="4"></textarea>
-        <br><br>
-        <button type="submit" class="btn-send">إرسال الطلب للمطبعة</button>
-    </form>
+
+        <div class="card">
+            <img src="tshirt.png" alt="T-shirt">
+            <div class="card-body">
+                <h3>تيشرتات قطن فاخرة</h3>
+                <button class="btn-select" onclick="showOrder('تيشرت قطن')">تخصيص الآن</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="shield.png" alt="Shield">
+            <div class="card-body">
+                <h3>دروع كريستال وتكريم</h3>
+                <button class="btn-select" onclick="showOrder('درع كريستال')">تخصيص الآن</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="cert.png" alt="Certificate">
+            <div class="card-body">
+                <h3>شهادات تقدير فاخرة</h3>
+                <button class="btn-select" onclick="showOrder('شهادة تقدير')">تخصيص الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج الطلب -->
+    <div id="order-form-container">
+        <div class="back-link" onclick="goBack()">← العودة للمنتجات</div>
+        <h2 id="order-title" style="color: var(--primary);">تفاصيل طلبك</h2>
+        <form id="orderForm">
+            <label class="form-label">الاسم الكامل</label>
+            <input type="text" id="name" class="input-box" required placeholder="اكتب اسمك هنا">
+
+            <label class="form-label">رقم التواصل (واتساب)</label>
+            <input type="tel" id="phone" class="input-box" required placeholder="010XXXXXXXX">
+
+            <label class="form-label">العنوان بالتفصيل</label>
+            <textarea id="address" class="input-box" rows="3" required placeholder="المحافظة، المنطقة، الشارع..."></textarea>
+
+            <label class="form-label">ملاحظاتك (اللون، النص، المقاس...)</label>
+            <textarea id="notes" class="input-box" rows="4" placeholder="اكتب كل ما يدور في ذهنك بخصوص التصميم"></textarea>
+
+            <button type="submit" class="btn-confirm">تأكيد الطلب عبر واتساب</button>
+        </form>
+    </div>
 </div>
 
 <script>
-    let currentProduct = "";
+    let selectedItem = "";
 
-    function openOrder(productName) {
-        currentProduct = productName;
-        document.getElementById('main-grid').style.display = 'none';
-        document.getElementById('order-section').style.display = 'block';
-        document.getElementById('selected-product-title').innerText = "تخصيص: " + productName;
-        window.scrollTo({top: 0, behavior: 'smooth'});
+    function showOrder(item) {
+        selectedItem = item;
+        document.getElementById('grid').style.display = 'none';
+        document.getElementById('hero-text').style.display = 'none';
+        document.getElementById('order-form-container').style.display = 'block';
+        document.getElementById('order-title').innerText = "تخصيص طلب: " + item;
+        window.scrollTo(0,0);
     }
 
     function goBack() {
-        document.getElementById('main-grid').style.display = 'grid';
-        document.getElementById('order-section').style.display = 'none';
+        document.getElementById('grid').style.display = 'grid';
+        document.getElementById('hero-text').style.display = 'block';
+        document.getElementById('order-form-container').style.display = 'none';
     }
 
-    document.getElementById('detailsForm').onsubmit = function(e) {
+    document.getElementById('orderForm').onsubmit = function(e) {
         e.preventDefault();
-        const name = document.getElementById('custName').value;
-        const phone = document.getElementById('custPhone').value;
-        const addr = document.getElementById('address').value;
-        const notes = document.getElementById('notes').value;
+        const n = document.getElementById('name').value;
+        const p = document.getElementById('phone').value;
+        const a = document.getElementById('address').value;
+        const nt = document.getElementById('notes').value;
 
-        const message = `*طلب جديد من My Box Store* 📦%0A--------------------------%0A🔥 *المنتج:* ${currentProduct}%0A👤 *العميل:* ${name}%0A📞 *الهاتف:* ${phone}%0A📍 *العنوان:* ${addr}%0A📝 *ملاحظات:* ${notes}%0A--------------------------%0A_يرجى رفع الصورة المطلوبة الآن_`;
+        const fullMsg = `*طلب جديد من My Box Store* 📦%0A--------------------------%0A🔥 *المنتج:* ${selectedItem}%0A👤 *العميل:* ${n}%0A📞 *الهاتف:* ${p}%0A📍 *العنوان:* ${a}%0A📝 *التفاصيل:* ${nt}%0A--------------------------%0A_سأرسل لك الصورة الآن_`;
         
-        window.open(`https://wa.me/201032543968?text=${message}`);
+        window.open(`https://wa.me/201032543968?text=${fullMsg}`);
     };
 </script>
 
