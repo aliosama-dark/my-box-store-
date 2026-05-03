@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Box Store | طلب سريع</title>
+    <title>My Box Store | متجر الطباعة المخصص</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -17,26 +17,30 @@
         body { background-color: var(--soft-bg); text-align: center; margin: 0; padding: 0; }
 
         header { background: var(--white); padding: 20px; border-bottom: 3px solid var(--primary-purple); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
         .product-card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .img-box img { max-width: 100%; height: 150px; object-fit: contain; }
+        .img-box { height: 180px; display: flex; align-items: center; justify-content: center; }
+        .img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-        .btn-order { background: linear-gradient(135deg, var(--secondary-blue), var(--primary-purple)); color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .btn-order { background: linear-gradient(135deg, var(--secondary-blue), var(--primary-purple)); color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
 
         /* نموذج الطلب */
-        #order-section, #thanks-screen { display: none; background: white; padding: 30px; border-radius: 20px; max-width: 500px; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        #order-section, #thanks-screen { display: none; background: white; padding: 30px; border-radius: 20px; max-width: 600px; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: right; }
         
-        .form-group { margin-bottom: 20px; text-align: right; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; }
-        input { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-size: 1.1rem; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--primary-purple); }
+        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-size: 1rem; }
         
-        .btn-submit { background: #27ae60; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
+        .special-field { display: none; }
+        .btn-submit { background: #27ae60; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-size: 1.2rem; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        
+        .back-link { cursor: pointer; color: var(--secondary-blue); font-weight: bold; display: inline-block; margin-bottom: 15px; }
         
         /* شاشة الشكر */
+        #thanks-screen { text-align: center; }
         #thanks-screen h2 { color: #27ae60; }
-        .wa-hint { color: #666; font-size: 0.9rem; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -46,76 +50,121 @@
 </header>
 
 <div class="container">
-    <!-- شبكة المنتجات -->
     <div class="products-grid" id="main-grid">
+        <!-- تيشرت -->
         <div class="product-card">
             <div class="img-box"><img src="Gemini_Generated_Image_wmmh7rwmmh7rwmmh.png" alt="T-Shirt"></div>
-            <h3>تيشرت</h3>
-            <button class="btn-order" onclick="openOrder('تيشرت')">اطلب الآن</button>
+            <h3>تيشرتات قطن</h3>
+            <button class="btn-order" onclick="openOrder('تيشرت قطن', true, true)">اطلب الآن</button>
         </div>
+        <!-- مج -->
         <div class="product-card">
             <div class="img-box"><img src="mug.png" alt="Mug"></div>
-            <h3>مج</h3>
-            <button class="btn-order" onclick="openOrder('مج')">اطلب الآن</button>
+            <h3>مجات حرارية</h3>
+            <button class="btn-order" onclick="openOrder('مج حراري', true, false)">اطلب الآن</button>
         </div>
+        <!-- درع -->
         <div class="product-card">
             <div class="img-box"><img src="shield.png" alt="Shield"></div>
-            <h3>درع</h3>
-            <button class="btn-order" onclick="openOrder('درع')">اطلب الآن</button>
+            <h3>دروع كريستال</h3>
+            <button class="btn-order" onclick="openOrder('درع كريستال', true, false)">اطلب الآن</button>
+        </div>
+        <!-- شهادة -->
+        <div class="product-card">
+            <div class="img-box"><img src="cert.png" alt="Certificate"></div>
+            <h3>شهادات تقدير</h3>
+            <button class="btn-order" onclick="openOrder('شهادة تقدير', false, false)">اطلب الآن</button>
         </div>
     </div>
 
-    <!-- نموذج الرقم فقط -->
+    <!-- نموذج الطلب التفصيلي -->
     <div id="order-section">
-        <h3 id="prod-title"></h3>
-        <form id="quickForm">
+        <div class="back-link" onclick="goBack()">← العودة للمنتجات</div>
+        <h3 id="prod-title" style="text-align: center;"></h3>
+        <form id="fullForm">
             <div class="form-group">
                 <label>رقم الواتساب الخاص بك:</label>
                 <input type="tel" id="custPhone" required placeholder="01xxxxxxxxx">
             </div>
-            <div class="form-group" id="upload-area">
+
+            <!-- يظهر للمنتجات التي تحتاج صور -->
+            <div class="form-group special-field" id="upload-area">
                 <label>ارفق صورة التصميم (اختياري):</label>
                 <input type="file" id="pImg" accept="image/*">
             </div>
+
+            <!-- يظهر للتيشرت فقط -->
+            <div class="form-group special-field" id="size-area">
+                <label>المقاس:</label>
+                <select id="pSize">
+                    <option value="S">Small</option><option value="M">Medium</option>
+                    <option value="L">Large</option><option value="XL">X-Large</option>
+                    <option value="XXL">XX-Large</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>اللون المطلوب:</label>
+                <input type="text" id="pColor" placeholder="مثال: أسود، أبيض...">
+            </div>
+
+            <div class="form-group">
+                <label>ملاحظات إضافية (أو النص المطلوب طباعته):</label>
+                <textarea id="pNotes" rows="3"></textarea>
+            </div>
+
             <button type="submit" class="btn-submit">تأكيد الطلب</button>
         </form>
     </div>
 
     <!-- شاشة الشكر -->
     <div id="thanks-screen">
-        <h2>شكراً لك! تم استلام طلبك ✅</h2>
-        <p>جاري تحويلك الآن لتأكيد الطلب مع المختص...</p>
-        <p class="wa-hint">ستفتح نافذة واتساب، اضغط "إرسال" فقط.</p>
-        <button class="btn-order" onclick="location.reload()">العودة للمتجر</button>
+        <h2>شكراً لك! تم تسجيل طلبك ✅</h2>
+        <p>سيتم تحويلك الآن لتأكيد التفاصيل النهائية عبر واتساب...</p>
+        <button class="btn-order" style="width: auto;" onclick="location.reload()">العودة للمتجر</button>
     </div>
 </div>
 
 <script>
-    let selectedProd = "";
+    let currentP = "";
 
-    function openOrder(p) {
-        selectedProd = p;
+    function openOrder(p, showUpload, showSize) {
+        currentP = p;
         document.getElementById('main-grid').style.display = 'none';
         document.getElementById('order-section').style.display = 'block';
-        document.getElementById('prod-title').innerText = "طلب " + p;
+        document.getElementById('prod-title').innerText = "تخصيص طلب: " + p;
+
+        // إظهار وإخفاء الحقول بناءً على المنتج
+        document.getElementById('upload-area').style.display = showUpload ? 'block' : 'none';
+        document.getElementById('size-area').style.display = showSize ? 'block' : 'none';
     }
 
-    document.getElementById('quickForm').onsubmit = function(e) {
+    function goBack() {
+        document.getElementById('main-grid').style.display = 'grid';
+        document.getElementById('order-section').style.display = 'none';
+    }
+
+    document.getElementById('fullForm').onsubmit = function(e) {
         e.preventDefault();
-        const phone = document.getElementById('custPhone').value;
-        const hasImg = document.getElementById('pImg').files.length > 0;
         
-        // 1. إخفاء الفورم وإظهار رسالة الشكر
+        // جلب البيانات
+        const phone = document.getElementById('custPhone').value;
+        const color = document.getElementById('pColor').value;
+        const notes = document.getElementById('pNotes').value;
+        const size = (currentP === 'تيشرت قطن') ? document.getElementById('pSize').value : "N/A";
+        const hasImg = document.getElementById('pImg').files.length > 0 ? "نعم" : "لا";
+
+        // إظهار شاشة الشكر
         document.getElementById('order-section').style.display = 'none';
         document.getElementById('thanks-screen').style.display = 'block';
 
-        // 2. تجهيز الرسالة
-        const msg = `*طلب جديد من المتجر*%0A--------------------%0A📦 *المنتج:* ${selectedProd}%0A📱 *رقم العميل:* ${phone}%0A🖼️ *هل توجد صورة:* ${hasImg ? "نعم" : "لا"}%0A--------------------%0A_يرجى التواصل معي لإتمام التفاصيل._`;
+        // تجهيز الرسالة
+        const msg = `*طلب جديد من My Box Store*%0A--------------------%0A📦 *المنتج:* ${currentP}%0A📱 *رقم العميل:* ${phone}%0A🎨 *اللون:* ${color}%0A📏 *المقاس:* ${size}%0A🖼️ *إرفاق صورة:* ${hasImg}%0A📝 *ملاحظات:* ${notes}%0A--------------------`;
 
-        // 3. التحويل للواتساب بعد ثانية واحدة ليعطي فرصة لرؤية رسالة الشكر
+        // التحويل للواتساب بعد قليل
         setTimeout(() => {
             window.open(`https://wa.me/201032543968?text=${msg}`);
-        }, 1500);
+        }, 2000);
     };
 </script>
 
