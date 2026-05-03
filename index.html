@@ -3,226 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Box Store | احترافية الطباعة</title>
+    <title>My Box Store | هدايا وطباعة احترافية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* الألوان مستوحاة من هويتك البصرية */
-            --primary: #9b59b6;
-            --secondary: #3498db;
-            --bg-body: #f4f7fa; /* لون خلفية مريح جداً للعين */
-            --card-bg: #ffffff;
-            --text-main: #333;
-            --accent-grad: linear-gradient(135deg, #3498db, #9b59b6);
+            /* ألوان مريحة للعين مستوحاة من الهوية الخاصة بك */
+            --primary-purple: #9b59b6;
+            --secondary-blue: #3498db;
+            --soft-bg: #f8faff;
+            --dark-text: #2c3e50;
+            --white: #ffffff;
+            --grad: linear-gradient(135deg, #3498db, #9b59b6);
         }
 
-        * { box-sizing: border-box; transition: 0.3s; }
-
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background-color: var(--bg-body); 
-            margin: 0; 
-            color: var(--text-main);
-            padding-bottom: 50px;
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
         }
 
+        body {
+            background-color: var(--soft-bg);
+            color: var(--dark-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* رأس الصفحة */
         header {
-            background: white;
-            padding: 20px;
+            background: var(--white);
+            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-bottom: 3px solid var(--primary-purple);
         }
 
-        .logo-img {
-            width: 80px;
-            height: 80px;
+        .logo-container img {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            border: 2px solid var(--secondary);
+            border: 3px solid var(--secondary-blue);
+            margin-bottom: 15px;
         }
 
-        .welcome-text { margin-top: 10px; }
-        .welcome-text h1 { margin: 5px 0; color: var(--primary); font-size: 1.8rem; }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        /* حاوية المنتجات - مساحات واسعة */
+        /* شبكة المنتجات */
         .container {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        .grid {
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .product-card {
-            background: var(--card-bg);
+            background: var(--white);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid #edf2f7;
+            text-align: center;
         }
 
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(155, 89, 182, 0.1);
+        }
 
-        .img-holder {
-            width: 100%;
-            height: 250px;
-            background: #f9f9f9;
+        .img-box {
+            background: #fdfdfd;
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 15px;
         }
 
-        .img-holder img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* للحفاظ على أبعاد صور المنتجات */
-            padding: 10px;
+        .img-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
-        .card-info { padding: 25px; text-align: center; }
-        .card-info h3 { margin-bottom: 20px; font-size: 1.4rem; }
+        .card-content {
+            padding: 20px;
+        }
 
-        .order-btn {
-            background: var(--accent-grad);
-            color: white;
-            border: none;
-            padding: 12px 35px;
+        .card-content h3 {
+            margin: 0 0 20px 0;
+            font-size: 1.3rem;
+        }
+
+        .btn-order {
+            display: inline-block;
+            background: var(--grad);
+            color: var(--white);
+            padding: 12px 40px;
             border-radius: 50px;
+            text-decoration: none;
             font-weight: bold;
             cursor: pointer;
-            width: 80%;
-            font-size: 1.1rem;
+            border: none;
+            width: 90%;
         }
 
-        /* فورم الطلب - مساحة مريحة للعميل */
-        #order-screen {
+        /* واجهة طلب العميل */
+        #order-section {
             display: none;
-            background: white;
+            background: var(--white);
             padding: 40px;
             border-radius: 30px;
-            max-width: 850px;
-            margin: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
         }
 
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 10px; font-weight: 600; color: #555; }
-        
-        input, textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #f0f0f0;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            background: #fafafa;
-        }
-
-        input:focus, textarea:focus {
-            border-color: var(--secondary);
-            outline: none;
-            background: white;
-        }
-
-        .submit-btn {
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 20px;
-            border-radius: 15px;
-            width: 100%;
-            font-size: 1.3rem;
-            font-weight: bold;
+        .back-link {
+            color: var(--secondary-blue);
             cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .back-btn {
-            color: var(--secondary);
-            cursor: pointer;
-            font-weight: bold;
             display: inline-block;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .form-group {
             margin-bottom: 20px;
         }
 
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f0f3f7;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #f9fbff;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            background: var(--white);
+        }
+
+        .btn-submit {
+            background: #27ae60;
+            color: var(--white);
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #219150;
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.2);
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="logo.jpg" alt="Logo" class="logo-img">
-    <div class="welcome-text">
-        <h1>أهلاً بك في My Box Store</h1>
-        <p>نصنع هداياك بكل حب وإتقان</p>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="My Box Store Logo">
     </div>
+    <h1>أهلاً بك في My Box Store</h1>
+    <p>بوابتك للهدايا المخصصة والطباعة الإبداعية</p>
 </header>
 
-<div class="container" id="main-ui">
-    <div class="grid" id="product-grid">
-        <!-- كرت المج -->
+<div class="container">
+    <!-- شبكة عرض المنتجات -->
+    <div class="products-grid" id="main-grid">
         <div class="product-card">
-            <div class="img-holder">
-                <img src="watermarked_img_13861751088873795961.png" alt="Mug">
-            </div>
-            <div class="card-info">
+            <div class="img-box"><img src="mug.png" alt="Mug"></div>
+            <div class="card-content">
                 <h3>مجات حرارية</h3>
-                <button class="order-btn" onclick="openOrder('مج حراري')">اطلب الآن</button>
+                <button class="btn-order" onclick="openOrder('مج حراري')">اطلب الآن</button>
             </div>
         </div>
 
-        <!-- كرت التيشرت -->
         <div class="product-card">
-            <div class="img-holder">
-                <img src="watermarked_img_335891050426683520.png" alt="T-shirt">
-            </div>
-            <div class="card-info">
+            <div class="img-box"><img src="tshirt.png" alt="T-Shirt"></div>
+            <div class="card-content">
                 <h3>تيشرتات قطن</h3>
-                <button class="order-btn" onclick="openOrder('تيشرت قطن')">اطلب الآن</button>
+                <button class="btn-order" onclick="openOrder('تيشرت قطن')">اطلب الآن</button>
             </div>
         </div>
 
-        <!-- كرت الدرع -->
         <div class="product-card">
-            <div class="img-holder">
-                <img src="watermarked_img_15557467701462264152.png" alt="Shield">
-            </div>
-            <div class="card-info">
-                <h3>دروع وهدايا كريستال</h3>
-                <button class="order-btn" onclick="openOrder('درع كريستال')">اطلب الآن</button>
+            <div class="img-box"><img src="shield.png" alt="Shield"></div>
+            <div class="card-content">
+                <h3>دروع كريستال</h3>
+                <button class="btn-order" onclick="openOrder('درع كريستال')">اطلب الآن</button>
             </div>
         </div>
 
-        <!-- كرت الشهادة -->
         <div class="product-card">
-            <div class="img-holder">
-                <img src="watermarked_img_8836945739273446999.png" alt="Certificate">
-            </div>
-            <div class="card-info">
-                <h3>شهادات شكر وتقدير</h3>
-                <button class="order-btn" onclick="openOrder('شهادة تقدير')">اطلب الآن</button>
+            <div class="img-box"><img src="cert.png" alt="Certificate"></div>
+            <div class="card-content">
+                <h3>شهادات تقدير</h3>
+                <button class="btn-order" onclick="openOrder('شهادة تقدير')">اطلب الآن</button>
             </div>
         </div>
     </div>
 
-    <!-- فورم الطلب -->
-    <div id="order-screen">
-        <div class="back-btn" onclick="goBack()">← العودة للمنتجات</div>
-        <h2 id="product-title" style="color: var(--primary);"></h2>
+    <!-- نموذج الطلب -->
+    <div id="order-section">
+        <div class="back-link" onclick="goBack()">← العودة للمنتجات</div>
+        <h2 id="selected-product" style="color: var(--primary-purple);">تفاصيل الطلب</h2>
         <form id="orderForm">
             <div class="form-group">
                 <label>الاسم الكامل</label>
-                <input type="text" id="custName" required placeholder="مثال: علي أسامة">
+                <input type="text" id="custName" required placeholder="مثال: أحمد محمد">
             </div>
             <div class="form-group">
                 <label>العنوان بالتفصيل</label>
-                <textarea id="custAddr" rows="2" required placeholder="المحافظة، الحي، الشارع..."></textarea>
+                <textarea id="custAddr" rows="2" required placeholder="المحافظة، المدينة، الشارع..."></textarea>
             </div>
             <div class="form-group">
-                <label>ملاحظات التصميم (اللون، المقاس، النص المطلوب)</label>
-                <textarea id="custNotes" rows="4" placeholder="اكتب كل التفاصيل التي تريدها هنا..."></textarea>
+                <label>وصف الطلب (الألوان، المقاسات، أو أي تفاصيل إضافية)</label>
+                <textarea id="custNotes" rows="4" placeholder="اكتب ملاحظاتك هنا..."></textarea>
             </div>
-            <button type="submit" class="submit-btn">إرسال الطلب (واتساب)</button>
+            <button type="submit" class="btn-submit">تأكيد الطلب عبر واتساب</button>
         </form>
     </div>
 </div>
@@ -230,28 +253,29 @@
 <script>
     let pName = "";
 
-    function openOrder(name) {
-        pName = name;
-        document.getElementById('product-grid').style.display = 'none';
-        document.getElementById('order-screen').style.display = 'block';
-        document.getElementById('product-title').innerText = "تخصيص: " + name;
-        window.scrollTo(0,0);
+    function openOrder(product) {
+        pName = product;
+        document.getElementById('main-grid').style.display = 'none';
+        document.getElementById('order-section').style.display = 'block';
+        document.getElementById('selected-product').innerText = "تخصيص: " + product;
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
     function goBack() {
-        document.getElementById('product-grid').style.display = 'grid';
-        document.getElementById('order-screen').style.display = 'none';
+        document.getElementById('main-grid').style.display = 'grid';
+        document.getElementById('order-section').style.display = 'none';
     }
 
     document.getElementById('orderForm').onsubmit = function(e) {
         e.preventDefault();
-        const n = document.getElementById('custName').value;
-        const a = document.getElementById('custAddr').value;
-        const nt = document.getElementById('custNotes').value;
+        const name = document.getElementById('custName').value;
+        const addr = document.getElementById('custAddr').value;
+        const notes = document.getElementById('custNotes').value;
 
-        const msg = `*طلب جديد - My Box Store*%0A------------------%0A📦 *المنتج:* ${pName}%0A👤 *العميل:* ${n}%0A📍 *العنوان:* ${a}%0A📝 *التفاصيل:* ${nt}`;
+        const text = `*طلب جديد من متجر My Box Store* 📦%0A--------------------%0A📦 *المنتج:* ${pName}%0A👤 *العميل:* ${name}%0A📍 *العنوان:* ${addr}%0A📝 *التفاصيل:* ${notes}%0A--------------------`;
         
-        window.open(`https://wa.me/201032543968?text=${msg}`);
+        // الرقم الخاص بك مدمج في الرابط
+        window.open(`https://wa.me/201032543968?text=${text}`);
     };
 </script>
 
