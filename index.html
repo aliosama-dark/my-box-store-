@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Box Store | متجرك المبدع</title>
+    <title>My Box Store | هداياك بكل حب</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -28,159 +28,141 @@
             font-family: 'Cairo', sans-serif; 
             background-color: var(--bg); 
             margin: 0; color: var(--dark);
-            line-height: 1.6;
         }
 
-        /* هيدر مفعم بالحياة */
         header { 
             background: white; 
-            padding: 40px 20px; 
+            padding: 30px 20px; 
             text-align: center; 
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
         }
 
-        .logo-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        /* استخدام اللوجو image_5e6711.jpg مع حركة */
         .main-logo {
-            width: 130px;
-            height: 130px;
-            object-fit: contain;
-            border-radius: 30px;
+            width: 120px;
+            height: auto;
+            border-radius: 25px;
             animation: floating 3s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(108, 92, 231, 0.2));
         }
 
         @keyframes floating {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
 
         header h1 { 
-            font-size: 2.2rem; 
+            font-size: 2rem; 
             font-weight: 900;
-            margin: 10px 0;
             background: linear-gradient(45deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin: 10px 0;
         }
 
-        .container { max-width: 1000px; margin: -40px auto 50px; padding: 0 20px; }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
 
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 30px; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 25px; 
         }
 
         .card { 
             background: white; 
-            padding: 25px; 
-            border-radius: 35px; 
+            padding: 20px; 
+            border-radius: 30px; 
             text-align: center; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(0,0,0,0.02);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            transition: 0.3s;
         }
 
-        .card:hover { 
-            transform: scale(1.05);
-            box-shadow: 0 25px 50px rgba(108, 92, 231, 0.1);
-        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(108, 92, 231, 0.1); }
 
         .card img { 
-            width: 100%; height: 220px; 
+            width: 100%; height: 200px; 
             object-fit: cover; 
-            border-radius: 25px; 
-            margin-bottom: 20px;
+            border-radius: 20px; 
+            margin-bottom: 15px;
         }
 
         .btn { 
-            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-            color: white; border: none; padding: 15px 30px; 
-            border-radius: 20px; cursor: pointer; width: 100%; 
-            font-weight: 700; font-size: 1.1rem;
-            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
+            background: linear-gradient(135deg, var(--secondary), var(--primary)); 
+            color: white; border: none; padding: 12px; 
+            border-radius: 18px; cursor: pointer; width: 100%; 
+            font-weight: 700; font-size: 1rem;
         }
 
-        .btn:active { transform: scale(0.95); }
-
-        /* نموذج الطلب */
         #order-form { 
-            display: none; background: white; padding: 40px; 
-            border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            display: none; background: white; padding: 35px; 
+            border-radius: 35px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
         }
 
         input, select, textarea { 
-            width: 100%; padding: 18px; margin: 10px 0; 
-            border: 2px solid #f1f1f1; border-radius: 20px; 
-            font-family: 'Cairo'; font-size: 1rem;
-            transition: border-color 0.3s;
+            width: 100%; padding: 15px; margin: 10px 0; 
+            border: 2px solid #f1f1f1; border-radius: 15px; font-family: 'Cairo';
         }
-
-        input:focus { border-color: var(--primary); outline: none; }
 
         .submit-btn { 
             background: #00b894; color: white; width: 100%; 
-            padding: 20px; border: none; border-radius: 20px; 
-            font-weight: 800; font-size: 1.2rem; cursor: pointer;
-            margin-top: 20px;
+            padding: 18px; border: none; border-radius: 15px; 
+            font-weight: 800; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-wrapper animate__animated animate__fadeIn">
-        <!-- تأكد من وجود صورة image_5e6711.jpg في ملفاتك -->
-        <img src="image_5e6711.jpg" alt="Logo" class="main-logo" onerror="this.src='https://via.placeholder.com/130?text=Logo'">
-    </div>
-    <h1 class="animate__animated animate__backInDown">My Box Store</h1>
+    <img src="logo.jpg" alt="Logo" class="main-logo">
+    <h1>My Box Store</h1>
     <p style="color: #636e72;">نطبع مشاعرك على هداياك بكل حب ❤️</p>
 </header>
 
 <div class="container">
-    <div id="main-grid" class="grid animate__animated animate__fadeInUp">
-        <!-- كروت المنتجات -->
+    <div id="main-grid" class="grid animate__animated animate__fadeIn">
+        <!-- تيشرتات -->
         <div class="card">
             <img src="Gemini_Generated_Image_wmmh7rwmmh7rwmmh.png">
-            <h3>تيشرتات قطن فاخرة</h3>
+            <h3>تيشرتات قطن</h3>
             <button class="btn" onclick="openForm('تيشرت قطن', true)">تخصيص الآن ✨</button>
         </div>
+        <!-- مجات -->
         <div class="card">
             <img src="mug.png">
-            <h3>مجات حرارية مبدعة</h3>
-            <button class="btn" onclick="openForm('مج حراري', false)">اطلب تصميمك ✨</button>
+            <h3>مجات حرارية</h3>
+            <button class="btn" onclick="openForm('مج حراري', false)">اطلب الآن ✨</button>
         </div>
+        <!-- دروع -->
         <div class="card">
             <img src="shield.png">
-            <h3>دروع كريستال أنيقة</h3>
+            <h3>دروع كريستال</h3>
             <button class="btn" onclick="openForm('درع كريستال', false)">تخليد ذكرى ✨</button>
+        </div>
+        <!-- الشهادة عادت هنا -->
+        <div class="card">
+            <img src="cert.png">
+            <h3>شهادات تقدير</h3>
+            <button class="btn" onclick="openForm('شهادة تقدير', false)">تجهيز الشهادة ✨</button>
         </div>
     </div>
 
-    <!-- نموذج تخصيص الطلب -->
+    <!-- نموذج الطلب -->
     <div id="order-form" class="animate__animated animate__zoomIn">
-        <h2 style="text-align:center; color: var(--primary);">تجهيز طلبك الإبداعي</h2>
+        <h2 id="form-title" style="text-align:center; color: var(--primary);"></h2>
         <form id="contact-form">
-            <input type="text" id="cust_name" placeholder="ما هو اسمك؟" required>
-            <input type="tel" id="cust_phone" placeholder="رقم الواتساب للتواصل" required>
+            <input type="text" id="cust_name" placeholder="الاسم بالكامل" required>
+            <input type="tel" id="cust_phone" placeholder="رقم الواتساب" required>
             <div id="s-div" style="display:none;">
                 <select id="cust_size">
-                    <option value="M">مقاس Medium</option>
-                    <option value="L">مقاس Large</option>
-                    <option value="XL">مقاس X-Large</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">X-Large</option>
                 </select>
             </div>
-            <input type="text" id="cust_color" placeholder="لون المنتج المفضل">
-            <textarea id="cust_notes" rows="4" placeholder="اكتب لنا مشاعرك أو الكلمات التي تريد طباعتها..."></textarea>
-            <button type="submit" class="submit-btn" id="s-btn">إرسال الطلب للمطبعة 🚀</button>
+            <input type="text" id="cust_color" placeholder="اللون المطلوب">
+            <textarea id="cust_notes" rows="4" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+            <button type="submit" class="submit-btn" id="s-btn">إرسال الطلب 🚀</button>
+            <p onclick="location.reload()" style="text-align:center; cursor:pointer; color:var(--primary); margin-top:15px;">← العودة للمتجر</p>
         </form>
     </div>
 </div>
@@ -191,6 +173,7 @@
         currentProduct = p;
         document.getElementById('main-grid').style.display = 'none';
         document.getElementById('order-form').style.display = 'block';
+        document.getElementById('form-title').innerText = "طلب " + p;
         document.getElementById('s-div').style.display = s ? 'block' : 'none';
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
@@ -198,7 +181,7 @@
     document.getElementById('contact-form').onsubmit = function(e) {
         e.preventDefault();
         const btn = document.getElementById('s-btn');
-        btn.innerText = "جاري إرسال إبداعك...";
+        btn.innerText = "جاري الإرسال...";
         btn.disabled = true;
 
         const templateParams = {
@@ -206,17 +189,17 @@
             prod: currentProduct,
             phone: document.getElementById('cust_phone').value,
             size: currentProduct === 'تيشرت قطن' ? document.getElementById('cust_size').value : "N/A",
-            color: document.getElementById('cust_color').value || "حسب الذوق",
+            color: document.getElementById('cust_color').value || "حسب الاختيار",
             notes: document.getElementById('cust_notes').value || "لا يوجد",
             time: new Date().toLocaleString('ar-EG')
         };
 
         emailjs.send("service_irixc5m", "template_9psshpd", templateParams)
         .then(() => {
-            alert("تم استلام مشاعرك بنجاح! سنتواصل معك قريباً ❤️");
+            alert("تم استلام طلبك بنجاح!");
             location.reload();
         }, (err) => {
-            alert("عذراً، حدث خطأ.. حاول مرة أخرى");
+            alert("حدث خطأ.. حاول مرة أخرى");
             btn.disabled = false;
         });
     };
