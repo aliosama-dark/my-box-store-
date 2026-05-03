@@ -41,18 +41,19 @@
             position: sticky; top: 0; z-index: 1000;
         }
 
-        /* تنسيق اللوجو الجديد */
+        /* تنسيق اللوجو المستخرج من مشروعك */
         .logo-img {
-            width: 100px; /* يمكنك تكبير أو تصغير اللوجو من هنا */
+            width: 120px; /* حجم اللوجو */
             height: auto;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            animation: pulse 2s infinite;
+            animation: pulseCustom 2s infinite ease-in-out;
+            cursor: pointer;
         }
 
-        header h1 { 
-            margin: 10px 0 0; font-size: 1.6rem; font-weight: 800;
-            color: var(--dark);
+        @keyframes pulseCustom {
+            0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(155, 89, 182, 0)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.3)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(155, 89, 182, 0)); }
         }
 
         .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
@@ -70,6 +71,7 @@
             border: 1px solid rgba(0,0,0,0.03);
             text-align: center; 
             position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
         }
 
         .card:hover { 
@@ -89,6 +91,7 @@
             color: white; border: none; padding: 14px; 
             border-radius: 15px; cursor: pointer; width: 100%; 
             font-weight: 700;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
         #order-form { 
@@ -98,7 +101,7 @@
             animation: fadeInUp 0.5s;
         }
 
-        .form-header { color: var(--primary); text-align: center; font-weight: 800; margin-bottom: 30px; }
+        .form-header { color: var(--primary); text-align: center; font-weight: 800; font-size: 1.5rem; margin-bottom: 30px; }
 
         input, select, textarea { 
             width: 100%; padding: 15px; margin-top: 8px; 
@@ -110,14 +113,7 @@
             background: #2ecc71; color: white; width: 100%; 
             padding: 18px; border: none; border-radius: 15px; 
             cursor: pointer; margin-top: 30px; font-weight: 800; 
-        }
-
-        #thanks { display: none; text-align: center; padding: 50px 20px; animation: bounceIn 0.8s; }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            font-size: 1.1rem;
         }
 
         .back-btn { color: var(--secondary); cursor: pointer; font-weight: 700; margin-bottom: 20px; display: inline-block; }
@@ -127,9 +123,9 @@
 
 <header>
     <div class="animate__animated animate__fadeInDown">
-        <!-- استدعاء اللوجو الخاص بك هنا -->
-        <img src="image_5e6711.jpg" alt="My Box Store Logo" class="logo-img">
-        <h1>My Box Store</h1>
+        <!-- استخدام اللوجو الموجود في المشروع -->
+        <img src="image_5e6711.jpg" alt="My Box Store" class="logo-img" onclick="location.reload()">
+        <h1 style="margin-top: 10px; font-weight: 800; background: linear-gradient(to right, #9b59b6, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">My Box Store</h1>
     </div>
 </header>
 
@@ -157,27 +153,36 @@
         </div>
     </div>
 
+    <!-- نموذج الطلب (EmailJS) -->
     <div id="order-form">
         <span class="back-btn" onclick="location.reload()">← العودة للمنتجات</span>
         <div class="form-header" id="f-title"></div>
         <form id="contact-form">
-            <label>الاسم الكامل:</label>
+            <label>اسمك الجميل:</label>
             <input type="text" id="cust_name" placeholder="اكتب اسمك هنا" required>
-            <label>رقم هاتف الواتساب:</label>
+            <label>رقم الواتساب:</label>
             <input type="tel" id="cust_phone" placeholder="01xxxxxxxxx" required>
-            <div id="s-div" style="display:none;"><label>المقاس:</label><select id="cust_size"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option></select></div>
-            <label>اللون:</label>
-            <input type="text" id="cust_color" placeholder="مثال: أسود">
-            <label>الملاحظات:</label>
-            <textarea id="cust_notes" rows="4" placeholder="أي تفاصيل أخرى تريدها في الطباعة؟"></textarea>
-            <button type="submit" class="submit-btn" id="s-btn">إرسال الطلب ✨</button>
+            <div id="s-div" style="display:none;">
+                <label>المقاس:</label>
+                <select id="cust_size">
+                    <option value="S">Small</option>
+                    <option value="M" selected>Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">X-Large</option>
+                </select>
+            </div>
+            <label>اللون المطلوب:</label>
+            <input type="text" id="cust_color" placeholder="مثال: أبيض">
+            <label>ملاحظات إضافية:</label>
+            <textarea id="cust_notes" rows="4" placeholder="أي تفاصيل أخرى تهمك؟"></textarea>
+            <button type="submit" class="submit-btn" id="s-btn">تأكيد الطلب ✨</button>
         </form>
     </div>
 
-    <div id="thanks">
-        <h2 style="color:#2ecc71;">تم الإرسال بنجاح! ✅</h2>
-        <p>سنقوم بالتواصل معك في أقرب وقت.</p>
-        <button class="btn" style="width:auto; padding: 10px 40px;" onclick="location.reload()">العودة</button>
+    <div id="thanks" style="display:none; text-align: center; padding: 40px;">
+        <h2 style="color:#2ecc71;">تم استلام طلبك يا فنان! ✅</h2>
+        <p>سنتواصل معك عبر الواتساب في أقرب وقت ممكن.</p>
+        <button class="btn" style="width:auto; padding: 12px 40px;" onclick="location.reload()">العودة للمتجر</button>
     </div>
 </div>
 
@@ -187,7 +192,7 @@
         currentProduct = p;
         document.getElementById('main-grid').style.display = 'none';
         document.getElementById('order-form').style.display = 'block';
-        document.getElementById('f-title').innerText = "طلب " + p;
+        document.getElementById('f-title').innerText = "تخصيص طلب " + p;
         document.getElementById('s-div').style.display = s ? 'block' : 'none';
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
@@ -195,7 +200,7 @@
     document.getElementById('contact-form').onsubmit = function(e) {
         e.preventDefault();
         const btn = document.getElementById('s-btn');
-        btn.innerText = "جاري الإرسال...";
+        btn.innerText = "جاري إرسال طلبك...";
         btn.disabled = true;
 
         const templateParams = {
@@ -213,7 +218,7 @@
             document.getElementById('order-form').style.display = 'none';
             document.getElementById('thanks').style.display = 'block';
         }, (err) => {
-            alert("خطأ في الإرسال");
+            alert("حدث خطأ، حاول مرة أخرى");
             btn.disabled = false;
         });
     };
