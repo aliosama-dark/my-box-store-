@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Box Store | اطلب الآن</title>
+    <title>My Box Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- مكتبة EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
        (function(){
-          // تم وضع الـ Public Key الخاص بك هنا
           emailjs.init("-I-pY1UXrpFHj2Voh"); 
        })();
     </script>
 
     <style>
-        :root { --p: #9b59b6; --s: #3498db; --bg: #f8faff; }
+        :root { --p: #9b59b6; --s: #3498db; --bg: #ffffff; }
         * { box-sizing: border-box; }
         body { font-family: 'Cairo', sans-serif; background: var(--bg); margin: 0; padding: 0; }
-        header { background: white; padding: 15px; border-bottom: 3px solid var(--p); text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .container { max-width: 900px; margin: 20px auto; padding: 20px; }
+        header { background: white; padding: 15px; text-align: center; }
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
-        .card img { max-width: 100%; height: 160px; object-fit: contain; margin-bottom: 15px; }
-        .btn { background: linear-gradient(135deg, var(--s), var(--p)); color: white; border: none; padding: 12px; border-radius: 20px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1rem; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 15px; border-radius: 15px; border: 1px solid #eee; text-align: center; }
+        .card img { max-width: 100%; height: 150px; object-fit: contain; }
+        .btn { background: linear-gradient(135deg, var(--s), var(--p)); color: white; border: none; padding: 10px; border-radius: 15px; cursor: pointer; width: 100%; font-weight: bold; }
 
-        #order-form, #thanks { display: none; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 550px; margin: auto; text-align: right; }
-        label { display: block; margin-top: 15px; font-weight: bold; color: var(--p); }
-        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #eee; border-radius: 10px; font-size: 1rem; outline: none; }
-        .submit-btn { background: #27ae60; color: white; width: 100%; padding: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 25px; font-weight: bold; font-size: 1.2rem; }
-        .back-link { color: var(--s); cursor: pointer; display: inline-block; margin-bottom: 15px; font-weight: bold; }
+        #order-form, #thanks { display: none; text-align: right; }
+        .form-header { color: var(--p); text-align: center; font-weight: bold; margin-bottom: 25px; font-size: 1.4rem; }
+        label { display: block; margin-top: 20px; font-weight: bold; color: var(--p); font-size: 0.95rem; }
+        input, select, textarea { width: 100%; padding: 12px; margin-top: 8px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa; font-family: 'Cairo'; }
+        .submit-btn { background: #27ae60; color: white; width: 100%; padding: 15px; border: none; border-radius: 10px; cursor: pointer; margin-top: 30px; font-weight: bold; font-size: 1.1rem; }
+        .back-nav { color: #3498db; text-decoration: none; display: block; text-align: left; margin-bottom: 10px; font-size: 0.9rem; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -48,8 +46,9 @@
     </div>
 
     <div id="order-form">
-        <div class="back-link" onclick="location.reload()">← العودة للمنتجات</div>
-        <h3 id="form-title" style="text-align:center; color: var(--p);"></h3>
+        <div class="back-nav" onclick="location.reload()">العودة للمنتجات ←</div>
+        <div class="form-header" id="f-title"></div>
+        
         <form id="contact-form">
             <label>الاسم الكامل:</label>
             <input type="text" name="u_name" required>
@@ -57,10 +56,13 @@
             <label>رقم هاتف الواتساب:</label>
             <input type="tel" name="u_phone" required placeholder="01xxxxxxxxx">
             
-            <div id="size-div" style="display:none;">
+            <div id="s-div" style="display:none;">
                 <label>المقاس المطلوب:</label>
                 <select name="u_size">
-                    <option value="S">Small</option><option value="M">Medium</option><option value="L">Large</option><option value="XL">X-Large</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                    <option value="X-Large">X-Large</option>
                 </select>
             </div>
             
@@ -68,59 +70,55 @@
             <input type="text" name="u_color">
             
             <label>ملاحظات أو النص المراد طباعته:</label>
-            <textarea name="u_notes" rows="3"></textarea>
+            <textarea name="u_notes" rows="4"></textarea>
             
             <button type="submit" class="submit-btn" id="s-btn">تأكيد إرسال الطلب</button>
         </form>
     </div>
 
-    <div id="thanks" style="text-align:center;">
+    <div id="thanks" style="text-align:center; padding-top: 50px;">
         <h2 style="color:#27ae60;">تم استلام طلبك بنجاح! ✅</h2>
-        <p>شكراً لثقتك بنا، ستصلنا بياناتك وسنتواصل معك قريباً.</p>
-        <button class="btn" style="width:auto; padding: 10px 40px;" onclick="location.reload()">العودة للمتجر</button>
+        <p>سنتواصل معك قريباً لتأكيد التفاصيل.</p>
+        <button class="btn" style="width:auto; padding: 10px 30px;" onclick="location.reload()">العودة</button>
     </div>
 </div>
 
 <script>
-    let selectedProduct = "";
-
-    function openForm(productName, isTshirt) {
-        selectedProduct = productName;
+    let selectedP = "";
+    function openForm(p, showSize) {
+        selectedP = p;
         document.getElementById('main-grid').style.display = 'none';
         document.getElementById('order-form').style.display = 'block';
-        document.getElementById('form-title').innerText = "طلب " + productName;
-        document.getElementById('size-div').style.display = isTshirt ? 'block' : 'none';
-        window.scrollTo(0,0);
+        document.getElementById('f-title').innerText = "طلب " + p;
+        document.getElementById('s-div').style.display = showSize ? 'block' : 'none';
     }
 
-    document.getElementById('contact-form').onsubmit = function(event) {
-        event.preventDefault();
+    document.getElementById('contact-form').onsubmit = function(e) {
+        e.preventDefault();
         const btn = document.getElementById('s-btn');
         btn.innerText = "جاري الإرسال...";
         btn.disabled = true;
 
-        const templateParams = {
-            title: "طلب جديد من الموقع",
+        const params = {
+            title: "طلب جديد",
             name: this.u_name.value,
-            prod: selectedProduct,
+            prod: selectedP,
             phone: this.u_phone.value,
             color: this.u_color.value || "غير محدد",
-            size: selectedProduct === 'تيشرت قطن' ? this.u_size.value : "N/A",
-            notes: this.u_notes.value || "لا توجد ملاحظات"
+            size: selectedP === 'تيشرت قطن' ? this.u_size.value : "N/A",
+            notes: this.u_notes.value || "لا يوجد"
         };
 
-        // تم وضع Service ID و Template ID الخاص بك هنا
-        emailjs.send("service_irixc5m", "template_9psshpd", templateParams)
-        .then(function() {
+        emailjs.send("service_irixc5m", "template_9psshpd", params)
+        .then(() => {
             document.getElementById('order-form').style.display = 'none';
             document.getElementById('thanks').style.display = 'block';
-        }, function(error) {
-            alert("حدث خطأ، حاول مرة أخرى");
-            btn.innerText = "تأكيد إرسال الطلب";
+        }, (err) => {
+            alert("فشل الإرسال");
             btn.disabled = false;
+            btn.innerText = "تأكيد إرسال الطلب";
         });
     };
 </script>
-
 </body>
 </html>
