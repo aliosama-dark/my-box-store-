@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>متجر الطباعة - إرسال طلب</title>
+    <style>
+        :root {
+            /* الألوان مستوحاة من WhatsApp Image 2026-05-01 at 1.02.41 AM.jpeg */
+            --main-gradient: linear-gradient(90deg, #3498db, #9b59b6);
+            --dark-color: #2c3e50;
+        }
+        body { font-family: sans-serif; background-color: #f4f7f6; padding: 20px; }
+        .order-form { 
+            max-width: 500px; margin: auto; background: white; 
+            padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+        h2 { text-align: center; color: var(--dark-color); }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, textarea { 
+            width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; 
+        }
+        button { 
+            width: 100%; padding: 12px; border: none; border-radius: 8px;
+            background: var(--main-gradient); color: white; font-size: 16px; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="order-form">
+    <h2>طلب طباعة جديد</h2>
+    <form id="printOrder">
+        <div class="input-group">
+            <label>نوع المنتج</label>
+            <select id="product">
+                <option>مج (Mug)</option>
+                <option>تيشرت</option>
+                <option>درع تكريم</option>
+                <option>شهادة شكر</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>اللون / الخامة</label>
+            <input type="text" id="material" placeholder="مثلاً: قطن أسود، مج حراري...">
+        </div>
+        <div class="input-group">
+            <label>ارفع تصميمك (صورة)</label>
+            <input type="file" id="designFile" accept="image/*">
+        </div>
+        <div class="input-group">
+            <label>تفاصيل إضافية (نص أو ملاحظات)</label>
+            <textarea id="details" rows="4"></textarea>
+        </div>
+        <button type="submit">إرسال الطلب عبر واتساب</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('printOrder').onsubmit = function(e) {
+        e.preventDefault();
+        const product = document.getElementById('product').value;
+        const details = document.getElementById('details').value;
+        const material = document.getElementById('material').value;
+        
+        // كحل سريع لإرسال البيانات إليك مباشرة
+        const message = `طلب جديد من الموقع:%0A- المنتج: ${product}%0A- الخامة: ${material}%0A- التفاصيل: ${details}`;
+        window.open(`https://wa.me/20XXXXXXXXXX?text=${message}`); // ضع رقمك هنا
+    };
+</script>
+
+</body>
+</html>
