@@ -6,223 +6,252 @@
     <title>My Box Store | احترافية الطباعة</title>
     <style>
         :root {
-            /* الألوان مستوحاة من اللوجو الخاص بك */
+            /* الألوان مستوحاة من هويتك البصرية */
             --primary: #9b59b6;
             --secondary: #3498db;
-            --bg-light: #fdfdfd;
-            --text-dark: #2d3436;
-            --shadow: 0 10px 30px rgba(0,0,0,0.05);
+            --bg-body: #f4f7fa; /* لون خلفية مريح جداً للعين */
+            --card-bg: #ffffff;
+            --text-main: #333;
+            --accent-grad: linear-gradient(135deg, #3498db, #9b59b6);
         }
+
+        * { box-sizing: border-box; transition: 0.3s; }
 
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f7f9fc; 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--bg-body); 
             margin: 0; 
-            color: var(--text-dark);
-            line-height: 1.6;
+            color: var(--text-main);
+            padding-bottom: 50px;
         }
 
-        /* الهيدر */
-        .navbar {
+        header {
             background: white;
-            padding: 15px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: var(--shadow);
-        }
-
-        .navbar img { height: 60px; border-radius: 50%; }
-
-        .hero {
+            padding: 20px;
             text-align: center;
-            padding: 60px 20px;
-            background: white;
-            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        .hero h1 { 
-            font-size: 2.2rem; 
-            color: var(--primary);
-            margin-bottom: 10px;
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--secondary);
         }
 
-        /* شبكة المنتجات واسعة ومريحة */
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        .welcome-text { margin-top: 10px; }
+        .welcome-text h1 { margin: 5px 0; color: var(--primary); font-size: 1.8rem; }
 
-        .products-grid {
+        /* حاوية المنتجات - مساحات واسعة */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .card {
-            background: white;
+        .product-card {
+            background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: 0.4s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             border: 1px solid #eee;
         }
 
-        .card:hover { transform: translateY(-10px); border-color: var(--secondary); }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
 
-        .card img { width: 100%; height: 250px; object-fit: cover; }
-
-        .card-body { padding: 20px; text-align: center; }
-
-        .btn-select {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
+        .img-holder {
             width: 100%;
-            font-size: 1rem;
+            height: 250px;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* منطقة الطلب واسعة جداً */
-        #order-form-container {
+        .img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* للحفاظ على أبعاد صور المنتجات */
+            padding: 10px;
+        }
+
+        .card-info { padding: 25px; text-align: center; }
+        .card-info h3 { margin-bottom: 20px; font-size: 1.4rem; }
+
+        .order-btn {
+            background: var(--accent-grad);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 80%;
+            font-size: 1.1rem;
+        }
+
+        /* فورم الطلب - مساحة مريحة للعميل */
+        #order-screen {
             display: none;
             background: white;
             padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            max-width: 800px;
-            margin: 20px auto;
+            border-radius: 30px;
+            max-width: 850px;
+            margin: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .input-box {
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 10px; font-weight: 600; color: #555; }
+        
+        input, textarea {
             width: 100%;
             padding: 15px;
-            margin: 10px 0 20px 0;
             border: 2px solid #f0f0f0;
             border-radius: 12px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             background: #fafafa;
         }
 
-        .input-box:focus { border-color: var(--secondary); outline: none; background: white; }
+        input:focus, textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+            background: white;
+        }
 
-        .form-label { font-weight: bold; display: block; margin-right: 5px; }
-
-        .btn-confirm {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        .submit-btn {
+            background: #27ae60;
             color: white;
             border: none;
             padding: 20px;
             border-radius: 15px;
             width: 100%;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            margin-top: 20px;
         }
 
-        .back-link { color: var(--secondary); cursor: pointer; display: inline-block; margin-bottom: 20px; }
+        .back-btn {
+            color: var(--secondary);
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
 
     </style>
 </head>
 <body>
 
-<div class="navbar">
-    <div style="font-weight: bold; font-size: 1.5rem;">MY BOX STORE</div>
-    <img src="logo.jpg" alt="Logo">
-</div>
+<header>
+    <img src="logo.jpg" alt="Logo" class="logo-img">
+    <div class="welcome-text">
+        <h1>أهلاً بك في My Box Store</h1>
+        <p>نصنع هداياك بكل حب وإتقان</p>
+    </div>
+</header>
 
-<div class="hero" id="hero-text">
-    <h1>أهلاً بك في My Box Store</h1>
-    <p>اختر المنتج الذي تريده وسنقوم بالباقي</p>
-</div>
-
-<div class="container" id="main-content">
-    <div class="products-grid" id="grid">
-        <!-- تأكد من وجود الصور بنفس هذه الأسماء في GitHub -->
-        <div class="card">
-            <img src="mug.png" alt="Mug">
-            <div class="card-body">
-                <h3>مجات حرارية مميزة</h3>
-                <button class="btn-select" onclick="showOrder('مج حراري')">تخصيص الآن</button>
+<div class="container" id="main-ui">
+    <div class="grid" id="product-grid">
+        <!-- كرت المج -->
+        <div class="product-card">
+            <div class="img-holder">
+                <img src="watermarked_img_13861751088873795961.png" alt="Mug">
+            </div>
+            <div class="card-info">
+                <h3>مجات حرارية</h3>
+                <button class="order-btn" onclick="openOrder('مج حراري')">اطلب الآن</button>
             </div>
         </div>
 
-        <div class="card">
-            <img src="tshirt.png" alt="T-shirt">
-            <div class="card-body">
-                <h3>تيشرتات قطن فاخرة</h3>
-                <button class="btn-select" onclick="showOrder('تيشرت قطن')">تخصيص الآن</button>
+        <!-- كرت التيشرت -->
+        <div class="product-card">
+            <div class="img-holder">
+                <img src="watermarked_img_335891050426683520.png" alt="T-shirt">
+            </div>
+            <div class="card-info">
+                <h3>تيشرتات قطن</h3>
+                <button class="order-btn" onclick="openOrder('تيشرت قطن')">اطلب الآن</button>
             </div>
         </div>
 
-        <div class="card">
-            <img src="shield.png" alt="Shield">
-            <div class="card-body">
-                <h3>دروع كريستال وتكريم</h3>
-                <button class="btn-select" onclick="showOrder('درع كريستال')">تخصيص الآن</button>
+        <!-- كرت الدرع -->
+        <div class="product-card">
+            <div class="img-holder">
+                <img src="watermarked_img_15557467701462264152.png" alt="Shield">
+            </div>
+            <div class="card-info">
+                <h3>دروع وهدايا كريستال</h3>
+                <button class="order-btn" onclick="openOrder('درع كريستال')">اطلب الآن</button>
             </div>
         </div>
 
-        <div class="card">
-            <img src="cert.png" alt="Certificate">
-            <div class="card-body">
-                <h3>شهادات تقدير فاخرة</h3>
-                <button class="btn-select" onclick="showOrder('شهادة تقدير')">تخصيص الآن</button>
+        <!-- كرت الشهادة -->
+        <div class="product-card">
+            <div class="img-holder">
+                <img src="watermarked_img_8836945739273446999.png" alt="Certificate">
+            </div>
+            <div class="card-info">
+                <h3>شهادات شكر وتقدير</h3>
+                <button class="order-btn" onclick="openOrder('شهادة تقدير')">اطلب الآن</button>
             </div>
         </div>
     </div>
 
-    <!-- نموذج الطلب -->
-    <div id="order-form-container">
-        <div class="back-link" onclick="goBack()">← العودة للمنتجات</div>
-        <h2 id="order-title" style="color: var(--primary);">تفاصيل طلبك</h2>
+    <!-- فورم الطلب -->
+    <div id="order-screen">
+        <div class="back-btn" onclick="goBack()">← العودة للمنتجات</div>
+        <h2 id="product-title" style="color: var(--primary);"></h2>
         <form id="orderForm">
-            <label class="form-label">الاسم الكامل</label>
-            <input type="text" id="name" class="input-box" required placeholder="اكتب اسمك هنا">
-
-            <label class="form-label">رقم التواصل (واتساب)</label>
-            <input type="tel" id="phone" class="input-box" required placeholder="010XXXXXXXX">
-
-            <label class="form-label">العنوان بالتفصيل</label>
-            <textarea id="address" class="input-box" rows="3" required placeholder="المحافظة، المنطقة، الشارع..."></textarea>
-
-            <label class="form-label">ملاحظاتك (اللون، النص، المقاس...)</label>
-            <textarea id="notes" class="input-box" rows="4" placeholder="اكتب كل ما يدور في ذهنك بخصوص التصميم"></textarea>
-
-            <button type="submit" class="btn-confirm">تأكيد الطلب عبر واتساب</button>
+            <div class="form-group">
+                <label>الاسم الكامل</label>
+                <input type="text" id="custName" required placeholder="مثال: علي أسامة">
+            </div>
+            <div class="form-group">
+                <label>العنوان بالتفصيل</label>
+                <textarea id="custAddr" rows="2" required placeholder="المحافظة، الحي، الشارع..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>ملاحظات التصميم (اللون، المقاس، النص المطلوب)</label>
+                <textarea id="custNotes" rows="4" placeholder="اكتب كل التفاصيل التي تريدها هنا..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">إرسال الطلب (واتساب)</button>
         </form>
     </div>
 </div>
 
 <script>
-    let selectedItem = "";
+    let pName = "";
 
-    function showOrder(item) {
-        selectedItem = item;
-        document.getElementById('grid').style.display = 'none';
-        document.getElementById('hero-text').style.display = 'none';
-        document.getElementById('order-form-container').style.display = 'block';
-        document.getElementById('order-title').innerText = "تخصيص طلب: " + item;
+    function openOrder(name) {
+        pName = name;
+        document.getElementById('product-grid').style.display = 'none';
+        document.getElementById('order-screen').style.display = 'block';
+        document.getElementById('product-title').innerText = "تخصيص: " + name;
         window.scrollTo(0,0);
     }
 
     function goBack() {
-        document.getElementById('grid').style.display = 'grid';
-        document.getElementById('hero-text').style.display = 'block';
-        document.getElementById('order-form-container').style.display = 'none';
+        document.getElementById('product-grid').style.display = 'grid';
+        document.getElementById('order-screen').style.display = 'none';
     }
 
     document.getElementById('orderForm').onsubmit = function(e) {
         e.preventDefault();
-        const n = document.getElementById('name').value;
-        const p = document.getElementById('phone').value;
-        const a = document.getElementById('address').value;
-        const nt = document.getElementById('notes').value;
+        const n = document.getElementById('custName').value;
+        const a = document.getElementById('custAddr').value;
+        const nt = document.getElementById('custNotes').value;
 
-        const fullMsg = `*طلب جديد من My Box Store* 📦%0A--------------------------%0A🔥 *المنتج:* ${selectedItem}%0A👤 *العميل:* ${n}%0A📞 *الهاتف:* ${p}%0A📍 *العنوان:* ${a}%0A📝 *التفاصيل:* ${nt}%0A--------------------------%0A_سأرسل لك الصورة الآن_`;
+        const msg = `*طلب جديد - My Box Store*%0A------------------%0A📦 *المنتج:* ${pName}%0A👤 *العميل:* ${n}%0A📍 *العنوان:* ${a}%0A📝 *التفاصيل:* ${nt}`;
         
-        window.open(`https://wa.me/201032543968?text=${fullMsg}`);
+        window.open(`https://wa.me/201032543968?text=${msg}`);
     };
 </script>
 
