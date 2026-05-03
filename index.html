@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- تغيير اسم الرابط هنا -->
     <title>My Box Store</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- مكتبة EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
        (function(){
-          // الـ Public Key الخاص بك
           emailjs.init("-I-pY1UXrpFHj2Voh"); 
        })();
     </script>
@@ -21,15 +21,11 @@
         body { font-family: 'Cairo', sans-serif; background: var(--bg); margin: 0; padding: 0; }
         header { background: white; padding: 20px; text-align: center; border-bottom: 1px solid #eee; }
         .container { max-width: 600px; margin: 20px auto; padding: 20px; }
-        
-        /* واجهة المنتجات */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .card { background: white; padding: 15px; border-radius: 15px; border: 1px solid #eee; text-align: center; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .card img { max-width: 100%; height: 150px; object-fit: contain; border-radius: 10px; }
         .btn { background: linear-gradient(135deg, var(--s), var(--p)); color: white; border: none; padding: 12px; border-radius: 15px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
-        
-        /* نموذج الطلب */
         #order-form, #thanks { display: none; background: white; padding: 20px; border-radius: 15px; border: 1px solid #eee; }
         .form-header { color: var(--p); text-align: center; font-weight: bold; margin-bottom: 25px; font-size: 1.4rem; }
         label { display: block; margin-top: 20px; font-weight: bold; color: var(--p); font-size: 0.95rem; }
@@ -43,7 +39,6 @@
 <header><h1>My Box Store</h1></header>
 
 <div class="container">
-    <!-- قائمة المنتجات -->
     <div id="main-grid" class="grid">
         <div class="card"><img src="Gemini_Generated_Image_wmmh7rwmmh7rwmmh.png"><h3>تيشرتات قطن</h3><button class="btn" onclick="openForm('تيشرت قطن', true)">اطلب الآن</button></div>
         <div class="card"><img src="mug.png"><h3>مجات حرارية</h3><button class="btn" onclick="openForm('مج حراري', false)">اطلب الآن</button></div>
@@ -51,90 +46,64 @@
         <div class="card"><img src="cert.png"><h3>شهادات تقدير</h3><button class="btn" onclick="openForm('شهادة تقدير', false)">اطلب الآن</button></div>
     </div>
 
-    <!-- نموذج إدخال البيانات -->
     <div id="order-form">
         <div class="back-nav" onclick="location.reload()">العودة للمنتجات ←</div>
         <div class="form-header" id="f-title"></div>
         <form id="contact-form">
             <label>الاسم الكامل:</label>
-            <input type="text" id="cust_name" placeholder="اكتب اسمك هنا" required>
-            
+            <input type="text" id="cust_name" required>
             <label>رقم هاتف الواتساب:</label>
-            <input type="tel" id="cust_phone" placeholder="01xxxxxxxxx" required>
-            
-            <div id="s-div" style="display:none;">
-                <label>المقاس المطلوب:</label>
-                <select id="cust_size">
-                    <option value="Small">Small</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Large">Large</option>
-                    <option value="X-Large">X-Large</option>
-                    <option value="XX-Large">XX-Large</option>
-                </select>
-            </div>
-            
-            <label>اللون المطلوب:</label>
-            <input type="text" id="cust_color" placeholder="مثال: أسود، أبيض...">
-            
-            <label>ملاحظات أو النص المراد طباعته:</label>
-            <textarea id="cust_notes" rows="4" placeholder="اكتب أي تفاصيل إضافية هنا..."></textarea>
-            
-            <button type="submit" class="submit-btn" id="s-btn">إرسال الطلب عبر البريد</button>
+            <input type="tel" id="cust_phone" required>
+            <div id="s-div" style="display:none;"><label>المقاس:</label><select id="cust_size"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option></select></div>
+            <label>اللون:</label>
+            <input type="text" id="cust_color">
+            <label>الملاحظات:</label>
+            <textarea id="cust_notes" rows="4"></textarea>
+            <button type="submit" class="submit-btn" id="s-btn">إرسال الطلب</button>
         </form>
     </div>
 
-    <!-- رسالة النجاح -->
     <div id="thanks" style="text-align:center;">
-        <h2 style="color:#27ae60;">تم إرسال طلبك بنجاح! ✅</h2>
-        <p>سنتواصل معك عبر الواتساب لتأكيد تفاصيل الطباعة.</p>
-        <button class="btn" style="width:auto; padding: 10px 40px;" onclick="location.reload()">العودة للمتجر</button>
+        <h2 style="color:#27ae60;">تم الإرسال بنجاح! ✅</h2>
+        <button class="btn" style="width:auto; padding: 10px 40px;" onclick="location.reload()">العودة</button>
     </div>
 </div>
 
 <script>
     let currentProduct = "";
-
-    // وظيفة فتح النموذج
-    function openForm(productName, showSizeField) {
-        currentProduct = productName;
+    function openForm(p, s) {
+        currentProduct = p;
         document.getElementById('main-grid').style.display = 'none';
         document.getElementById('order-form').style.display = 'block';
-        document.getElementById('f-title').innerText = "طلب " + productName;
-        document.getElementById('s-div').style.display = showSizeField ? 'block' : 'none';
-        window.scrollTo(0,0);
+        document.getElementById('f-title').innerText = "طلب " + p;
+        document.getElementById('s-div').style.display = s ? 'block' : 'none';
     }
 
-    // وظيفة إرسال البيانات إلى EmailJS
     document.getElementById('contact-form').onsubmit = function(e) {
         e.preventDefault();
         const btn = document.getElementById('s-btn');
-        btn.innerText = "جاري إرسال طلبك...";
+        btn.innerText = "جاري الإرسال...";
         btn.disabled = true;
 
-        // تجهيز المتغيرات لترسل إلى القالب المبسط
         const templateParams = {
             name: document.getElementById('cust_name').value,
             prod: currentProduct,
             phone: document.getElementById('cust_phone').value,
-            size: currentProduct === 'تيشرت قطن' ? document.getElementById('cust_size').value : "غير مطلوب",
-            color: document.getElementById('cust_color').value || "حسب ذوق المتجر",
-            notes: document.getElementById('cust_notes').value || "لا توجد ملاحظات",
+            size: currentProduct === 'تيشرت قطن' ? document.getElementById('cust_size').value : "N/A",
+            color: document.getElementById('cust_color').value || "غير محدد",
+            notes: document.getElementById('cust_notes').value || "لا يوجد",
             time: new Date().toLocaleString('ar-EG')
         };
 
-        // إرسال الطلب
         emailjs.send("service_irixc5m", "template_9psshpd", templateParams)
         .then(() => {
             document.getElementById('order-form').style.display = 'none';
             document.getElementById('thanks').style.display = 'block';
-        }, (error) => {
-            console.error("EmailJS Error:", error);
-            alert("عذراً، حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً.");
+        }, (err) => {
+            alert("خطأ في الإرسال");
             btn.disabled = false;
-            btn.innerText = "إرسال الطلب عبر البريد";
         });
     };
 </script>
-
 </body>
 </html>
