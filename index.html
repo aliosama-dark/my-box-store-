@@ -9,6 +9,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
        (function(){
+          // الـ Public Key الخاص بك
           emailjs.init("-I-pY1UXrpFHj2Voh"); 
        })();
     </script>
@@ -19,12 +20,10 @@
         body { font-family: 'Cairo', sans-serif; background: var(--bg); margin: 0; padding: 0; }
         header { background: white; padding: 15px; text-align: center; }
         .container { max-width: 600px; margin: 20px auto; padding: 20px; }
-        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .card { background: white; padding: 15px; border-radius: 15px; border: 1px solid #eee; text-align: center; }
         .card img { max-width: 100%; height: 150px; object-fit: contain; }
         .btn { background: linear-gradient(135deg, var(--s), var(--p)); color: white; border: none; padding: 10px; border-radius: 15px; cursor: pointer; width: 100%; font-weight: bold; }
-
         #order-form, #thanks { display: none; text-align: right; }
         .form-header { color: var(--p); text-align: center; font-weight: bold; margin-bottom: 25px; font-size: 1.4rem; }
         label { display: block; margin-top: 20px; font-weight: bold; color: var(--p); font-size: 0.95rem; }
@@ -48,17 +47,16 @@
     <div id="order-form">
         <div class="back-nav" onclick="location.reload()">العودة للمنتجات ←</div>
         <div class="form-header" id="f-title"></div>
-        
         <form id="contact-form">
             <label>الاسم الكامل:</label>
-            <input type="text" name="u_name" required>
+            <input type="text" name="user_name" required>
             
             <label>رقم هاتف الواتساب:</label>
-            <input type="tel" name="u_phone" required placeholder="01xxxxxxxxx">
+            <input type="tel" name="user_phone" required placeholder="01xxxxxxxxx">
             
             <div id="s-div" style="display:none;">
                 <label>المقاس المطلوب:</label>
-                <select name="u_size">
+                <select name="user_size">
                     <option value="Small">Small</option>
                     <option value="Medium">Medium</option>
                     <option value="Large">Large</option>
@@ -67,10 +65,10 @@
             </div>
             
             <label>اللون المطلوب:</label>
-            <input type="text" name="u_color">
+            <input type="text" name="user_color">
             
             <label>ملاحظات أو النص المراد طباعته:</label>
-            <textarea name="u_notes" rows="4"></textarea>
+            <textarea name="user_notes" rows="4"></textarea>
             
             <button type="submit" class="submit-btn" id="s-btn">تأكيد إرسال الطلب</button>
         </form>
@@ -99,14 +97,16 @@
         btn.innerText = "جاري الإرسال...";
         btn.disabled = true;
 
+        // تم تعديل الأسماء هنا لتطابق القالب في صورتك السابقة تماماً
         const params = {
-            title: "طلب جديد",
-            name: this.u_name.value,
+            title: "طلب جديد من الموقع",
+            name: this.user_name.value,
             prod: selectedP,
-            phone: this.u_phone.value,
-            color: this.u_color.value || "غير محدد",
-            size: selectedP === 'تيشرت قطن' ? this.u_size.value : "N/A",
-            notes: this.u_notes.value || "لا يوجد"
+            phone: this.user_phone.value,
+            color: this.user_color.value || "غير محدد",
+            size: selectedP === 'تيشرت قطن' ? this.user_size.value : "N/A",
+            notes: this.user_notes.value || "لا يوجد",
+            message: "وصلك طلب جديد من " + this.user_name.value // أضفت هذا لملء خانة {{message}} في القالب
         };
 
         emailjs.send("service_irixc5m", "template_9psshpd", params)
@@ -114,7 +114,7 @@
             document.getElementById('order-form').style.display = 'none';
             document.getElementById('thanks').style.display = 'block';
         }, (err) => {
-            alert("فشل الإرسال");
+            alert("فشل الإرسال: " + JSON.stringify(err));
             btn.disabled = false;
             btn.innerText = "تأكيد إرسال الطلب";
         });
