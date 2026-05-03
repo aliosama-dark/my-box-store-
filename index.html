@@ -9,7 +9,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
        (function(){
-          // الـ Public Key الخاص بك
           emailjs.init("-I-pY1UXrpFHj2Voh"); 
        })();
     </script>
@@ -49,34 +48,20 @@
         <div class="form-header" id="f-title"></div>
         <form id="contact-form">
             <label>الاسم الكامل:</label>
-            <input type="text" name="user_name" required>
-            
+            <input type="text" name="u_name" required>
             <label>رقم هاتف الواتساب:</label>
-            <input type="tel" name="user_phone" required placeholder="01xxxxxxxxx">
-            
-            <div id="s-div" style="display:none;">
-                <label>المقاس المطلوب:</label>
-                <select name="user_size">
-                    <option value="Small">Small</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Large">Large</option>
-                    <option value="X-Large">X-Large</option>
-                </select>
-            </div>
-            
+            <input type="tel" name="u_phone" required placeholder="01xxxxxxxxx">
+            <div id="s-div" style="display:none;"><label>المقاس المطلوب:</label><select name="u_size"><option value="Small">Small</option><option value="Medium">Medium</option><option value="Large">Large</option><option value="X-Large">X-Large</option></select></div>
             <label>اللون المطلوب:</label>
-            <input type="text" name="user_color">
-            
+            <input type="text" name="u_color">
             <label>ملاحظات أو النص المراد طباعته:</label>
-            <textarea name="user_notes" rows="4"></textarea>
-            
+            <textarea name="u_notes" rows="4"></textarea>
             <button type="submit" class="submit-btn" id="s-btn">تأكيد إرسال الطلب</button>
         </form>
     </div>
 
     <div id="thanks" style="text-align:center; padding-top: 50px;">
         <h2 style="color:#27ae60;">تم استلام طلبك بنجاح! ✅</h2>
-        <p>سنتواصل معك قريباً لتأكيد التفاصيل.</p>
         <button class="btn" style="width:auto; padding: 10px 30px;" onclick="location.reload()">العودة</button>
     </div>
 </div>
@@ -97,16 +82,18 @@
         btn.innerText = "جاري الإرسال...";
         btn.disabled = true;
 
-        // تم تعديل الأسماء هنا لتطابق القالب في صورتك السابقة تماماً
+        // إرسال جميع المتغيرات الموجودة في الصورة image_5ef91f.png
         const params = {
             title: "طلب جديد من الموقع",
-            name: this.user_name.value,
+            name: this.u_name.value,
+            email: "no-reply@mybox.com", // لملء خانة Reply To
+            time: new Date().toLocaleString('ar-EG'), // لملء خانة الوقت
+            message: "تفاصيل الطلب أدناه:", // لملء خانة الرسالة الرئيسية
             prod: selectedP,
-            phone: this.user_phone.value,
-            color: this.user_color.value || "غير محدد",
-            size: selectedP === 'تيشرت قطن' ? this.user_size.value : "N/A",
-            notes: this.user_notes.value || "لا يوجد",
-            message: "وصلك طلب جديد من " + this.user_name.value // أضفت هذا لملء خانة {{message}} في القالب
+            phone: this.u_phone.value,
+            color: this.u_color.value || "غير محدد",
+            size: selectedP === 'تيشرت قطن' ? this.u_size.value : "N/A",
+            notes: this.u_notes.value || "لا يوجد"
         };
 
         emailjs.send("service_irixc5m", "template_9psshpd", params)
@@ -114,7 +101,7 @@
             document.getElementById('order-form').style.display = 'none';
             document.getElementById('thanks').style.display = 'block';
         }, (err) => {
-            alert("فشل الإرسال: " + JSON.stringify(err));
+            alert("خطأ: " + err.text);
             btn.disabled = false;
             btn.innerText = "تأكيد إرسال الطلب";
         });
