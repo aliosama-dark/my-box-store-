@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* ألوان مريحة للعين مستوحاة من الهوية الخاصة بك */
             --primary-purple: #9b59b6;
             --secondary-blue: #3498db;
             --soft-bg: #f8faff;
@@ -30,7 +29,6 @@
             line-height: 1.6;
         }
 
-        /* رأس الصفحة */
         header {
             background: var(--white);
             padding: 30px 20px;
@@ -45,6 +43,7 @@
             border-radius: 50%;
             border: 3px solid var(--secondary-blue);
             margin-bottom: 15px;
+            object-fit: cover;
         }
 
         header h1 {
@@ -55,7 +54,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* شبكة المنتجات */
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -75,6 +73,8 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.04);
             border: 1px solid #edf2f7;
             text-align: center;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
@@ -84,21 +84,33 @@
 
         .img-box {
             background: #fdfdfd;
-            height: 220px;
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 15px;
+            position: relative;
         }
 
         .img-box img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            z-index: 2;
+        }
+
+        /* نص بديل في حال تعذر تحميل الصورة */
+        .img-box::before {
+            content: "My Box Store";
+            position: absolute;
+            color: #ccc;
+            font-weight: bold;
+            z-index: 1;
         }
 
         .card-content {
             padding: 20px;
+            margin-top: auto;
         }
 
         .card-content h3 {
@@ -119,7 +131,6 @@
             width: 90%;
         }
 
-        /* واجهة طلب العميل */
         #order-section {
             display: none;
             background: var(--white);
@@ -175,31 +186,25 @@
             cursor: pointer;
             margin-top: 10px;
         }
-
-        .btn-submit:hover {
-            background: #219150;
-            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.2);
-        }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo-container">
-        <img src="logo.jpg" alt="My Box Store Logo">
+        <img src="logo.jpg" alt="Logo">
     </div>
     <h1>أهلاً بك في My Box Store</h1>
     <p>بوابتك للهدايا المخصصة والطباعة الإبداعية</p>
 </header>
 
 <div class="container">
-    <!-- شبكة عرض المنتجات -->
     <div class="products-grid" id="main-grid">
         <div class="product-card">
-            <div class="img-box"><img src="mug.png" alt="Mug"></div>
+            <div class="img-box"><img src="shield.png" alt="Deroo"></div>
             <div class="card-content">
-                <h3>مجات حرارية</h3>
-                <button class="btn-order" onclick="openOrder('مج حراري')">اطلب الآن</button>
+                <h3>دروع كريستال</h3>
+                <button class="btn-order" onclick="openOrder('درع كريستال')">اطلب الآن</button>
             </div>
         </div>
 
@@ -212,10 +217,10 @@
         </div>
 
         <div class="product-card">
-            <div class="img-box"><img src="shield.png" alt="Shield"></div>
+            <div class="img-box"><img src="mug.png" alt="Mug"></div>
             <div class="card-content">
-                <h3>دروع كريستال</h3>
-                <button class="btn-order" onclick="openOrder('درع كريستال')">اطلب الآن</button>
+                <h3>مجات حرارية</h3>
+                <button class="btn-order" onclick="openOrder('مج حراري')">اطلب الآن</button>
             </div>
         </div>
 
@@ -228,7 +233,6 @@
         </div>
     </div>
 
-    <!-- نموذج الطلب -->
     <div id="order-section">
         <div class="back-link" onclick="goBack()">← العودة للمنتجات</div>
         <h2 id="selected-product" style="color: var(--primary-purple);">تفاصيل الطلب</h2>
@@ -274,7 +278,6 @@
 
         const text = `*طلب جديد من متجر My Box Store* 📦%0A--------------------%0A📦 *المنتج:* ${pName}%0A👤 *العميل:* ${name}%0A📍 *العنوان:* ${addr}%0A📝 *التفاصيل:* ${notes}%0A--------------------`;
         
-        // الرقم الخاص بك مدمج في الرابط
         window.open(`https://wa.me/201032543968?text=${text}`);
     };
 </script>
