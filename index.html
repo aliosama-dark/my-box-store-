@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Box Store</title>
+    <title>My Box Store | متجرك المبدع</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -17,172 +17,171 @@
 
     <style>
         :root {
-            --primary: #9b59b6;
-            --secondary: #3498db;
-            --dark: #2c3e50;
-            --light: #f8f9fa;
-            --white: #ffffff;
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --dark: #2d3436;
+            --bg: #f9f9fb;
         }
 
-        * { box-sizing: border-box; transition: all 0.3s ease; }
-        
         body { 
             font-family: 'Cairo', sans-serif; 
-            background-color: var(--light); 
-            margin: 0; padding: 0; color: var(--dark);
-            overflow-x: hidden;
+            background-color: var(--bg); 
+            margin: 0; color: var(--dark);
+            line-height: 1.6;
         }
 
+        /* هيدر مفعم بالحياة */
         header { 
-            background: var(--white); 
-            padding: 20px 0; 
+            background: white; 
+            padding: 40px 20px; 
             text-align: center; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            position: sticky; top: 0; z-index: 1000;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* تنسيق اللوجو المستخرج من مشروعك */
-        .logo-img {
-            width: 120px; /* حجم اللوجو */
-            height: auto;
-            border-radius: 15px;
-            animation: pulseCustom 2s infinite ease-in-out;
-            cursor: pointer;
-        }
-
-        @keyframes pulseCustom {
-            0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(155, 89, 182, 0)); }
-            50% { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.3)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(155, 89, 182, 0)); }
-        }
-
-        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-            gap: 25px; 
-        }
-
-        .card { 
-            background: var(--white); 
-            padding: 20px; 
-            border-radius: 25px; 
-            border: 1px solid rgba(0,0,0,0.03);
-            text-align: center; 
+        .logo-wrapper {
             position: relative;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
-        }
-
-        .card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
-        }
-
-        .card img { 
-            width: 100%; height: 200px; 
-            object-fit: cover; 
-            border-radius: 18px; 
+            display: inline-block;
             margin-bottom: 15px;
         }
 
+        /* استخدام اللوجو image_5e6711.jpg مع حركة */
+        .main-logo {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            border-radius: 30px;
+            animation: floating 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(108, 92, 231, 0.2));
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        header h1 { 
+            font-size: 2.2rem; 
+            font-weight: 900;
+            margin: 10px 0;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container { max-width: 1000px; margin: -40px auto 50px; padding: 0 20px; }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 35px; 
+            text-align: center; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0,0,0,0.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+        }
+
+        .card:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(108, 92, 231, 0.1);
+        }
+
+        .card img { 
+            width: 100%; height: 220px; 
+            object-fit: cover; 
+            border-radius: 25px; 
+            margin-bottom: 20px;
+        }
+
         .btn { 
-            background: linear-gradient(135deg, var(--secondary), var(--primary)); 
-            color: white; border: none; padding: 14px; 
-            border-radius: 15px; cursor: pointer; width: 100%; 
-            font-weight: 700;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+            color: white; border: none; padding: 15px 30px; 
+            border-radius: 20px; cursor: pointer; width: 100%; 
+            font-weight: 700; font-size: 1.1rem;
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
         }
 
+        .btn:active { transform: scale(0.95); }
+
+        /* نموذج الطلب */
         #order-form { 
-            display: none; background: var(--white); 
-            padding: 30px; border-radius: 30px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            animation: fadeInUp 0.5s;
+            display: none; background: white; padding: 40px; 
+            border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
-
-        .form-header { color: var(--primary); text-align: center; font-weight: 800; font-size: 1.5rem; margin-bottom: 30px; }
 
         input, select, textarea { 
-            width: 100%; padding: 15px; margin-top: 8px; 
-            border: 2px solid #eee; border-radius: 15px; 
-            font-family: 'Tajawal', sans-serif;
+            width: 100%; padding: 18px; margin: 10px 0; 
+            border: 2px solid #f1f1f1; border-radius: 20px; 
+            font-family: 'Cairo'; font-size: 1rem;
+            transition: border-color 0.3s;
         }
+
+        input:focus { border-color: var(--primary); outline: none; }
 
         .submit-btn { 
-            background: #2ecc71; color: white; width: 100%; 
-            padding: 18px; border: none; border-radius: 15px; 
-            cursor: pointer; margin-top: 30px; font-weight: 800; 
-            font-size: 1.1rem;
+            background: #00b894; color: white; width: 100%; 
+            padding: 20px; border: none; border-radius: 20px; 
+            font-weight: 800; font-size: 1.2rem; cursor: pointer;
+            margin-top: 20px;
         }
-
-        .back-btn { color: var(--secondary); cursor: pointer; font-weight: 700; margin-bottom: 20px; display: inline-block; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="animate__animated animate__fadeInDown">
-        <!-- استخدام اللوجو الموجود في المشروع -->
-        <img src="image_5e6711.jpg" alt="My Box Store" class="logo-img" onclick="location.reload()">
-        <h1 style="margin-top: 10px; font-weight: 800; background: linear-gradient(to right, #9b59b6, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">My Box Store</h1>
+    <div class="logo-wrapper animate__animated animate__fadeIn">
+        <!-- تأكد من وجود صورة image_5e6711.jpg في ملفاتك -->
+        <img src="image_5e6711.jpg" alt="Logo" class="main-logo" onerror="this.src='https://via.placeholder.com/130?text=Logo'">
     </div>
+    <h1 class="animate__animated animate__backInDown">My Box Store</h1>
+    <p style="color: #636e72;">نطبع مشاعرك على هداياك بكل حب ❤️</p>
 </header>
 
 <div class="container">
-    <div id="main-grid" class="grid animate__animated animate__fadeIn">
+    <div id="main-grid" class="grid animate__animated animate__fadeInUp">
+        <!-- كروت المنتجات -->
         <div class="card">
             <img src="Gemini_Generated_Image_wmmh7rwmmh7rwmmh.png">
-            <h3>تيشرتات قطن</h3>
-            <button class="btn" onclick="openForm('تيشرت قطن', true)">اطلب الآن</button>
+            <h3>تيشرتات قطن فاخرة</h3>
+            <button class="btn" onclick="openForm('تيشرت قطن', true)">تخصيص الآن ✨</button>
         </div>
         <div class="card">
             <img src="mug.png">
-            <h3>مجات حرارية</h3>
-            <button class="btn" onclick="openForm('مج حراري', false)">اطلب الآن</button>
+            <h3>مجات حرارية مبدعة</h3>
+            <button class="btn" onclick="openForm('مج حراري', false)">اطلب تصميمك ✨</button>
         </div>
         <div class="card">
             <img src="shield.png">
-            <h3>دروع كريستال</h3>
-            <button class="btn" onclick="openForm('درع كريستال', false)">اطلب الآن</button>
-        </div>
-        <div class="card">
-            <img src="cert.png">
-            <h3>شهادات تقدير</h3>
-            <button class="btn" onclick="openForm('شهادة تقدير', false)">اطلب الآن</button>
+            <h3>دروع كريستال أنيقة</h3>
+            <button class="btn" onclick="openForm('درع كريستال', false)">تخليد ذكرى ✨</button>
         </div>
     </div>
 
-    <!-- نموذج الطلب (EmailJS) -->
-    <div id="order-form">
-        <span class="back-btn" onclick="location.reload()">← العودة للمنتجات</span>
-        <div class="form-header" id="f-title"></div>
+    <!-- نموذج تخصيص الطلب -->
+    <div id="order-form" class="animate__animated animate__zoomIn">
+        <h2 style="text-align:center; color: var(--primary);">تجهيز طلبك الإبداعي</h2>
         <form id="contact-form">
-            <label>اسمك الجميل:</label>
-            <input type="text" id="cust_name" placeholder="اكتب اسمك هنا" required>
-            <label>رقم الواتساب:</label>
-            <input type="tel" id="cust_phone" placeholder="01xxxxxxxxx" required>
+            <input type="text" id="cust_name" placeholder="ما هو اسمك؟" required>
+            <input type="tel" id="cust_phone" placeholder="رقم الواتساب للتواصل" required>
             <div id="s-div" style="display:none;">
-                <label>المقاس:</label>
                 <select id="cust_size">
-                    <option value="S">Small</option>
-                    <option value="M" selected>Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
+                    <option value="M">مقاس Medium</option>
+                    <option value="L">مقاس Large</option>
+                    <option value="XL">مقاس X-Large</option>
                 </select>
             </div>
-            <label>اللون المطلوب:</label>
-            <input type="text" id="cust_color" placeholder="مثال: أبيض">
-            <label>ملاحظات إضافية:</label>
-            <textarea id="cust_notes" rows="4" placeholder="أي تفاصيل أخرى تهمك؟"></textarea>
-            <button type="submit" class="submit-btn" id="s-btn">تأكيد الطلب ✨</button>
+            <input type="text" id="cust_color" placeholder="لون المنتج المفضل">
+            <textarea id="cust_notes" rows="4" placeholder="اكتب لنا مشاعرك أو الكلمات التي تريد طباعتها..."></textarea>
+            <button type="submit" class="submit-btn" id="s-btn">إرسال الطلب للمطبعة 🚀</button>
         </form>
-    </div>
-
-    <div id="thanks" style="display:none; text-align: center; padding: 40px;">
-        <h2 style="color:#2ecc71;">تم استلام طلبك يا فنان! ✅</h2>
-        <p>سنتواصل معك عبر الواتساب في أقرب وقت ممكن.</p>
-        <button class="btn" style="width:auto; padding: 12px 40px;" onclick="location.reload()">العودة للمتجر</button>
     </div>
 </div>
 
@@ -192,7 +191,6 @@
         currentProduct = p;
         document.getElementById('main-grid').style.display = 'none';
         document.getElementById('order-form').style.display = 'block';
-        document.getElementById('f-title').innerText = "تخصيص طلب " + p;
         document.getElementById('s-div').style.display = s ? 'block' : 'none';
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
@@ -200,7 +198,7 @@
     document.getElementById('contact-form').onsubmit = function(e) {
         e.preventDefault();
         const btn = document.getElementById('s-btn');
-        btn.innerText = "جاري إرسال طلبك...";
+        btn.innerText = "جاري إرسال إبداعك...";
         btn.disabled = true;
 
         const templateParams = {
@@ -208,17 +206,17 @@
             prod: currentProduct,
             phone: document.getElementById('cust_phone').value,
             size: currentProduct === 'تيشرت قطن' ? document.getElementById('cust_size').value : "N/A",
-            color: document.getElementById('cust_color').value || "غير محدد",
+            color: document.getElementById('cust_color').value || "حسب الذوق",
             notes: document.getElementById('cust_notes').value || "لا يوجد",
             time: new Date().toLocaleString('ar-EG')
         };
 
         emailjs.send("service_irixc5m", "template_9psshpd", templateParams)
         .then(() => {
-            document.getElementById('order-form').style.display = 'none';
-            document.getElementById('thanks').style.display = 'block';
+            alert("تم استلام مشاعرك بنجاح! سنتواصل معك قريباً ❤️");
+            location.reload();
         }, (err) => {
-            alert("حدث خطأ، حاول مرة أخرى");
+            alert("عذراً، حدث خطأ.. حاول مرة أخرى");
             btn.disabled = false;
         });
     };
