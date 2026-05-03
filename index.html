@@ -3,188 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Box Store | تخصيص الهدايا</title>
+    <title>My Box Store | طلب سريع</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-purple: #9b59b6;
             --secondary-blue: #3498db;
             --soft-bg: #f8faff;
-            --dark-text: #2c3e50;
             --white: #ffffff;
-            --grad: linear-gradient(135deg, #3498db, #9b59b6);
         }
 
-        * { box-sizing: border-box; transition: all 0.3s ease; font-family: Cairo, sans-serif; }
-        body { background-color: var(--soft-bg); color: var(--dark-text); margin: 0; padding: 0; }
+        * { box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
+        body { background-color: var(--soft-bg); text-align: center; margin: 0; padding: 0; }
 
-        header {
-            background: var(--white);
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-bottom: 3px solid var(--primary-purple);
-        }
+        header { background: var(--white); padding: 20px; border-bottom: 3px solid var(--primary-purple); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
 
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .img-box img { max-width: 100%; height: 150px; object-fit: contain; }
 
-        .product-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-            text-align: center;
-            padding-bottom: 20px;
-        }
+        .btn-order { background: linear-gradient(135deg, var(--secondary-blue), var(--primary-purple)); color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-top: 10px; }
 
-        .img-box { height: 200px; display: flex; align-items: center; justify-content: center; padding: 15px; }
-        .img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
-
-        .btn-order {
-            background: var(--grad);
-            color: white;
-            padding: 10px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-        }
-
-        #order-section { display: none; background: white; padding: 30px; border-radius: 25px; max-width: 700px; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 15px; text-align: right; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--primary-purple); }
-        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #f0f3f7; border-radius: 10px; }
+        /* نموذج الطلب */
+        #order-section, #thanks-screen { display: none; background: white; padding: 30px; border-radius: 20px; max-width: 500px; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
-        /* تنسيق حقل رفع الملفات */
-        input[type="file"] { background: #fdfdfd; border: 2px dashed var(--secondary-blue); cursor: pointer; }
-
-        .special-field { display: none; }
-
-        .btn-submit { background: #27ae60; color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px; }
+        .form-group { margin-bottom: 20px; text-align: right; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-size: 1.1rem; }
         
-        .upload-notice { font-size: 0.85rem; color: #e67e22; margin-top: 5px; font-weight: bold; }
+        .btn-submit { background: #27ae60; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
+        
+        /* شاشة الشكر */
+        #thanks-screen h2 { color: #27ae60; }
+        .wa-hint { color: #666; font-size: 0.9rem; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>My Box Store</h1>
-    <p>صمم هديتك بنفسك وارفع صورتك الخاصة</p>
 </header>
 
 <div class="container">
+    <!-- شبكة المنتجات -->
     <div class="products-grid" id="main-grid">
         <div class="product-card">
             <div class="img-box"><img src="Gemini_Generated_Image_wmmh7rwmmh7rwmmh.png" alt="T-Shirt"></div>
-            <h3>تيشرتات قطن</h3>
-            <button class="btn-order" onclick="openOrder('تيشرت قطن', true)">اطلب الآن</button>
+            <h3>تيشرت</h3>
+            <button class="btn-order" onclick="openOrder('تيشرت')">اطلب الآن</button>
         </div>
-
         <div class="product-card">
             <div class="img-box"><img src="mug.png" alt="Mug"></div>
-            <h3>مجات حرارية</h3>
-            <button class="btn-order" onclick="openOrder('مج حراري', true)">اطلب الآن</button>
+            <h3>مج</h3>
+            <button class="btn-order" onclick="openOrder('مج')">اطلب الآن</button>
         </div>
-
         <div class="product-card">
             <div class="img-box"><img src="shield.png" alt="Shield"></div>
-            <h3>دروع كريستال</h3>
-            <button class="btn-order" onclick="openOrder('درع كريستال', true)">اطلب الآن</button>
-        </div>
-
-        <div class="product-card">
-            <div class="img-box"><img src="cert.png" alt="Certificate"></div>
-            <h3>شهادات تقدير</h3>
-            <button class="btn-order" onclick="openOrder('شهادة تقدير', false)">اطلب الآن</button>
+            <h3>درع</h3>
+            <button class="btn-order" onclick="openOrder('درع')">اطلب الآن</button>
         </div>
     </div>
 
+    <!-- نموذج الرقم فقط -->
     <div id="order-section">
-        <div onclick="goBack()" style="cursor:pointer; color:var(--secondary-blue); margin-bottom:15px; font-weight:bold;">← العودة</div>
-        <h2 id="selected-product" style="text-align:center; color:var(--primary-purple);"></h2>
-        
-        <form id="orderForm">
+        <h3 id="prod-title"></h3>
+        <form id="quickForm">
             <div class="form-group">
-                <label>الاسم بالكامل</label>
-                <input type="text" id="custName" required placeholder="اسم المستلم">
+                <label>رقم الواتساب الخاص بك:</label>
+                <input type="tel" id="custPhone" required placeholder="01xxxxxxxxx">
             </div>
-
-            <!-- حقل رفع الصورة (يظهر لمنتجات محددة) -->
-            <div class="form-group special-field" id="upload-field">
-                <label>ارفع التصميم أو الصورة (اختياري)</label>
-                <input type="file" id="pImage" accept="image/*">
-                <p class="upload-notice">⚠️ سيُطلب منك إرسال الصورة في الواتساب بعد قليل.</p>
+            <div class="form-group" id="upload-area">
+                <label>ارفق صورة التصميم (اختياري):</label>
+                <input type="file" id="pImg" accept="image/*">
             </div>
-
-            <div class="form-group special-field" id="size-field">
-                <label>المقاس</label>
-                <select id="pSize">
-                    <option value="S">Small</option><option value="M">Medium</option>
-                    <option value="L">Large</option><option value="XL">X-Large</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>اللون</label>
-                <input type="text" id="pColor" placeholder="مثلاً: أسود، أبيض...">
-            </div>
-
-            <div class="form-group">
-                <label>العنوان</label>
-                <input type="text" id="custAddr" required>
-            </div>
-
-            <div class="form-group">
-                <label>ملاحظات الطباعة</label>
-                <textarea id="custNotes" rows="3" placeholder="اكتب الاسم أو العبارة المطلوبة..."></textarea>
-            </div>
-
-            <button type="submit" class="btn-submit">تأكيد وإرسال للواتساب</button>
+            <button type="submit" class="btn-submit">تأكيد الطلب</button>
         </form>
+    </div>
+
+    <!-- شاشة الشكر -->
+    <div id="thanks-screen">
+        <h2>شكراً لك! تم استلام طلبك ✅</h2>
+        <p>جاري تحويلك الآن لتأكيد الطلب مع المختص...</p>
+        <p class="wa-hint">ستفتح نافذة واتساب، اضغط "إرسال" فقط.</p>
+        <button class="btn-order" onclick="location.reload()">العودة للمتجر</button>
     </div>
 </div>
 
 <script>
-    let currentProduct = "";
+    let selectedProd = "";
 
-    function openOrder(product, needsUpload) {
-        currentProduct = product;
+    function openOrder(p) {
+        selectedProd = p;
         document.getElementById('main-grid').style.display = 'none';
         document.getElementById('order-section').style.display = 'block';
-        document.getElementById('selected-product').innerText = "تخصيص: " + product;
-
-        // التحكم في ظهور الحقول
-        document.getElementById('upload-field').style.display = needsUpload ? 'block' : 'none';
-        document.getElementById('size-field').style.display = (product === 'تيشرت قطن') ? 'block' : 'none';
-        
-        window.scrollTo(0,0);
+        document.getElementById('prod-title').innerText = "طلب " + p;
     }
 
-    function goBack() {
-        document.getElementById('main-grid').style.display = 'grid';
-        document.getElementById('order-section').style.display = 'none';
-    }
-
-    document.getElementById('orderForm').onsubmit = function(e) {
+    document.getElementById('quickForm').onsubmit = function(e) {
         e.preventDefault();
+        const phone = document.getElementById('custPhone').value;
+        const hasImg = document.getElementById('pImg').files.length > 0;
         
-        const hasImage = document.getElementById('pImage').files.length > 0;
-        const imgStatus = hasImage ? "✅ (سأقوم بإرفاق الصورة الآن)" : "❌ (لا يوجد)";
-        
-        const name = document.getElementById('custName').value;
-        const color = document.getElementById('pColor').value;
-        const size = (currentProduct === 'تيشرت قطن') ? `%0A📏 *المقاس:* ${document.getElementById('pSize').value}` : "";
-        const addr = document.getElementById('custAddr').value;
-        const notes = document.getElementById('custNotes').value;
+        // 1. إخفاء الفورم وإظهار رسالة الشكر
+        document.getElementById('order-section').style.display = 'none';
+        document.getElementById('thanks-screen').style.display = 'block';
 
-        const fullMsg = `*طلب جديد من My Box Store* 📦%0A--------------------%0A🔥 *المنتج:* ${currentProduct}%0A🖼️ *إرفاق صورة:* ${imgStatus}%0A👤 *العميل:* ${name}%0A🎨 *اللون:* ${color}${size}%0A📍 *العنوان:* ${addr}%0A📝 *التفاصيل:* ${notes}%0A--------------------`;
-        
-        if(hasImage) {
-            alert("سيتم فتح واتساب الآن.. من فضلك قم بإرسال الرسالة ثم أرفق الصورة التي اخترتها من الاستوديو.");
-        }
-        
-        window.open(`https://wa.me/201032543968?text=${fullMsg}`);
+        // 2. تجهيز الرسالة
+        const msg = `*طلب جديد من المتجر*%0A--------------------%0A📦 *المنتج:* ${selectedProd}%0A📱 *رقم العميل:* ${phone}%0A🖼️ *هل توجد صورة:* ${hasImg ? "نعم" : "لا"}%0A--------------------%0A_يرجى التواصل معي لإتمام التفاصيل._`;
+
+        // 3. التحويل للواتساب بعد ثانية واحدة ليعطي فرصة لرؤية رسالة الشكر
+        setTimeout(() => {
+            window.open(`https://wa.me/201032543968?text=${msg}`);
+        }, 1500);
     };
 </script>
 
