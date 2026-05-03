@@ -48,14 +48,14 @@
         <div class="form-header" id="f-title"></div>
         <form id="contact-form">
             <label>الاسم الكامل:</label>
-            <input type="text" name="u_name" required>
+            <input type="text" name="input_name" required>
             <label>رقم هاتف الواتساب:</label>
-            <input type="tel" name="u_phone" required placeholder="01xxxxxxxxx">
-            <div id="s-div" style="display:none;"><label>المقاس المطلوب:</label><select name="u_size"><option value="Small">Small</option><option value="Medium">Medium</option><option value="Large">Large</option><option value="X-Large">X-Large</option></select></div>
+            <input type="tel" name="input_phone" required placeholder="01xxxxxxxxx">
+            <div id="s-div" style="display:none;"><label>المقاس المطلوب:</label><select name="input_size"><option value="Small">Small</option><option value="Medium">Medium</option><option value="Large">Large</option><option value="X-Large">X-Large</option></select></div>
             <label>اللون المطلوب:</label>
-            <input type="text" name="u_color">
+            <input type="text" name="input_color">
             <label>ملاحظات أو النص المراد طباعته:</label>
-            <textarea name="u_notes" rows="4"></textarea>
+            <textarea name="input_notes" rows="4"></textarea>
             <button type="submit" class="submit-btn" id="s-btn">تأكيد إرسال الطلب</button>
         </form>
     </div>
@@ -67,9 +67,9 @@
 </div>
 
 <script>
-    let selectedP = "";
+    let currentProd = "";
     function openForm(p, showSize) {
-        selectedP = p;
+        currentProd = p;
         document.getElementById('main-grid').style.display = 'none';
         document.getElementById('order-form').style.display = 'block';
         document.getElementById('f-title').innerText = "طلب " + p;
@@ -82,21 +82,21 @@
         btn.innerText = "جاري الإرسال...";
         btn.disabled = true;
 
-        // إرسال جميع المتغيرات الموجودة في الصورة image_5ef91f.png
-        const params = {
+        // مطابقة الأسماء حرفياً مع صورتك image_5ee293.png
+        const emailParams = {
             title: "طلب جديد من الموقع",
-            name: this.u_name.value,
-            email: "no-reply@mybox.com", // لملء خانة Reply To
-            time: new Date().toLocaleString('ar-EG'), // لملء خانة الوقت
-            message: "تفاصيل الطلب أدناه:", // لملء خانة الرسالة الرئيسية
-            prod: selectedP,
-            phone: this.u_phone.value,
-            color: this.u_color.value || "غير محدد",
-            size: selectedP === 'تيشرت قطن' ? this.u_size.value : "N/A",
-            notes: this.u_notes.value || "لا يوجد"
+            name: this.input_name.value,
+            email: "alissg20045@gmail.com", 
+            time: new Date().toLocaleTimeString('ar-EG'),
+            message: "تفاصيل الطلب الجديد من المتجر:",
+            prod: currentProd,
+            phone: this.input_phone.value,
+            color: this.input_color.value || "غير محدد",
+            size: currentProd === 'تيشرت قطن' ? this.input_size.value : "غير متوفر",
+            notes: this.input_notes.value || "لا يوجد"
         };
 
-        emailjs.send("service_irixc5m", "template_9psshpd", params)
+        emailjs.send("service_irixc5m", "template_9psshpd", emailParams)
         .then(() => {
             document.getElementById('order-form').style.display = 'none';
             document.getElementById('thanks').style.display = 'block';
